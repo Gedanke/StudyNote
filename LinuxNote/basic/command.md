@@ -1257,268 +1257,1189 @@ chgrp group file
 chown user:group file
 ```
 
+### 罗列一个系统中所有使用了 SUID 控制的文件
+
 ```shell
-find / -perm -u+s 罗列一个系统中所有使用了SUID控制的文件
-chmod u+s /bin/file1 设置一个二进制文件的 SUID 位 - 运行该文件的用户也被赋予和所有者同样的权限
-chmod u-s /bin/file1 禁用一个二进制文件的 SUID位
-chmod g+s /home/public 设置一个目录的SGID 位 - 类似SUID ，不过这是针对目录的
-chmod g-s /home/public 禁用一个目录的 SGID 位
-chmod o+t /home/public 设置一个文件的 STIKY 位 - 只允许合法所有人删除文件
-chmod o-t /home/public 禁用一个目录的 STIKY 位
-chmod +x 文件路径 为所有者、所属组和其他用户添加执行的权限
-chmod -x 文件路径 为所有者、所属组和其他用户删除执行的权限
-chmod u+x 文件路径 为所有者添加执行的权限
-chmod g+x 文件路径 为所属组添加执行的权限
-chmod o+x 文件路径 为其他用户添加执行的权限
-chmod ug+x 文件路径 为所有者、所属组添加执行的权限
-chmod =wx 文件路径 为所有者、所属组和其他用户添加写、执行的权限，取消读权限
-chmod ug=wx 文件路径 为所有者、所属组添加写、执行的权限，取消读权限
+find / -perm -u+s 
 ```
 
-## 文件的特殊属性 ，使用 “+” 设置权限，使用 “-” 用于取消
+### 设置一个二进制文件 file 的 SUID 位
 
 ```shell
-chattr +a file1 只允许以追加方式读写文件
-chattr +c file1 允许这个文件能被内核自动压缩/解压
-chattr +d file1 在进行文件系统备份时，dump程序将忽略这个文件
-chattr +i file1 设置成不可变的文件，不能被删除、修改、重命名或者链接
-chattr +s file1 允许一个文件被安全地删除
-chattr +S file1 一旦应用程序对这个文件执行了写操作，使系统立刻把修改的结果写到磁盘
-chattr +u file1 若文件被删除，系统会允许你在以后恢复这个被删除的文件
-lsattr 显示特殊的属性
+chmod u+s /bin/file
+```
+
+运行该文件的用户也被赋予和所有者同样的权限
+
+### 禁用一个二进制文件 file 的 SUID 位
+
+```shell
+chmod u-s /bin/file
+```
+
+### 设置一个目录的 SGID 位
+
+```shell
+chmod g+s /home/public
+```
+
+类似 SUID ，不过这是针对目录的
+
+### 禁用一个目录的 SGID 位
+
+```shell
+$ chmod g-s /home/public 
+```
+
+### 设置一个目录的 STIKY 位
+
+```shell
+$ chmod o+t /home/public 
+```
+
+只允许合法所有人删除文件
+
+### 禁用一个目录的 STIKY 位
+
+```shell
+$ chmod o-t /home/public 
+```
+
+### 为所有者、所属组和其他用户添加执行的权限
+
+```shell
+$ chmod +x filePath
+```
+
+文件路径 filePath
+
+### 文件路径 为所有者、所属组和其他用户删除执行的权限
+
+```shell
+$ chmod -x filePath
+```
+
+### 为所有者添加执行的权限
+
+```shell
+$ chmod u+x filePath
+```
+
+### 为所属组添加执行的权限
+
+```shell
+$ chmod g+x filePath
+```
+
+### 为其他用户添加执行的权限
+
+```shell
+$ chmod o+x filePath
+```
+
+### 为所有者、所属组添加执行的权限
+
+```shell
+$ chmod ug+x filePath
+```
+
+### 为所有者、所属组和其他用户添加写、执行的权限，取消读权限
+
+```shell
+$ chmod =wx filePath
+```
+
+### 为所有者、所属组添加写、执行的权限，取消读权限
+
+```shell
+$ chmod ug=wx filePath
+```
+
+文件路径 filePath
+
+## 文件的特殊属性 ，使用 "+" 设置权限，使用 "-" 用于取消
+
+### 只允许以追加方式读写文件 file
+
+```shell
+$ chattr +a file
+```
+
+### 允许这个文件 file 能被内核自动压缩/解压
+
+```shell
+$ chattr +c file
+```
+
+### 在进行文件系统备份时，dump 程序将忽略这个文件 file
+
+```shell
+$ chattr +d file
+```
+
+### 设置成不可变的文件 file，不能被删除、修改、重命名或者链接
+
+```shell
+$ chattr +i file
+```
+
+### 允许一个文件 file 被安全地删除
+
+```shell
+$ chattr +s file
+```
+
+### 一旦应用程序对这个文件 file 执行了写操作，使系统立刻把修改的结果写到磁盘
+
+```shell
+$ chattr +S file
+```
+
+### 若文件 file 被删除，系统会允许你在以后恢复这个被删除的文件 file
+
+```shell
+$ chattr +u file
+```
+
+### 显示特殊的属性
+
+```shell
+$ lsattr
 ```
 
 ## 打包和压缩文件
 
+### 解压一个叫做 file1.bz2 的文件
+
 ```shell
-bunzip2 file1.bz2 解压一个叫做 'file1.bz2'的文件
-bzip2 file1 压缩一个叫做 'file1' 的文件
-gunzip file1.gz 解压一个叫做 'file1.gz'的文件
-gzip file1 压缩一个叫做 'file1'的文件
-gzip -9 file1 最大程度压缩
-rar a file1.rar test_file 创建一个叫做 'file1.rar' 的包
-rar a file1.rar file1 file2 dir1 同时压缩 'file1', 'file2' 以及目录 'dir1'
-rar x file1.rar 解压rar包
-unrar x file1.rar 解压rar包
-tar -cvf archive.tar file1 创建一个非压缩的 tarball
-tar -cvf archive.tar file1 file2 dir1 创建一个包含了 'file1', 'file2' 以及 'dir1'的档案文件
-tar -tf archive.tar 显示一个包中的内容
-tar -xvf archive.tar 释放一个包
-tar -xvf archive.tar -C /tmp 将压缩包释放到 /tmp目录下
-tar -cvfj archive.tar.bz2 dir1 创建一个bzip2格式的压缩包
-tar -xvfj archive.tar.bz2 解压一个bzip2格式的压缩包
-tar -cvfz archive.tar.gz dir1 创建一个gzip格式的压缩包
-tar -xvfz archive.tar.gz 解压一个gzip格式的压缩包
-zip file1.zip file1 创建一个zip格式的压缩包
-zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包
-unzip file1.zip 解压一个zip格式压缩包
+$ bunzip2 file.bz2
 ```
+
+### 压缩一个叫做 file 的文件
+
+```shell
+$ bzip2 file
+```
+
+### 解压一个叫做 file.gz 的文件
+
+```shell
+$ gunzip file.gz
+```
+
+### 压缩一个叫做 file 的文件
+
+```shell
+$ gzip file
+```
+
+### 最大程度压缩 file 文件
+
+```shell
+$ gzip -9 file
+```
+
+### 压缩 file 文件创建一个 file.rar 的包
+
+```shell
+sudo apt install rar
+```
+
+```shell
+$ rar a file.rar file
+```
+
+### 同时压缩 file1, file2 以及目录 dir1 创建 file.rar 包
+
+```shell
+$ rar a file.rar file1 file2 dir1
+```
+
+### 解压 file.rar 包
+
+```shell
+$ rar x file.rar
+```
+
+### 解压 file.rar 包
+
+```shell
+$ unrar x file1.rar
+```
+
+### 创建一个非压缩的 tarball.tar
+
+```shell
+$ tar -cvf archive.tar file
+```
+
+### 创建一个包含了 file1, file2 以及 dir1 的档案文件 archive.tar
+
+```shell
+$ tar -cvf archive.tar file1 file2 dir1
+```
+
+### 显示包 archive.tar 的内容
+
+```shell
+$ tar -tf archive.tar
+```
+
+### 释放 archive.tar 包
+
+```shell
+$ tar -xvf archive.tar
+```
+
+### 将压缩包 archive.tar 释放到 /tmp 目录下
+
+```shell
+$ tar -xvf archive.tar -C /tmp
+```
+
+### 创建一个 bzip2 格式的压缩包 archive.tar.bz2
+
+```shell
+$ tar -cvfj archive.tar.bz2 dir
+```
+
+### 解压一个 bzip2 格式的压缩包 archive.tar.bz2
+
+```shell
+$ tar -xvfj archive.tar.bz2
+```
+
+### 创建一个 gzip 格式的压缩包 archive.tar.gz
+
+```shell
+$ tar -cvfz archive.tar.gz dir
+```
+
+### 解压一个 gzip 格式的压缩包 archive.tar.gz
+
+```shell
+$ tar -xvfz archive.tar.gz
+```
+
+### 创建一个 zip 格式的压缩包 file.zip
+
+```shell
+$ zip file.zip file
+```
+
+### 将几个文件和目录同时压缩成一个zip格式的压缩包 file.zip
+
+```shell
+$ zip -r file.zip file1 file2 dir1
+```
+
+### 解压一个 zip 格式压缩包 file.zip
+
+```shell
+$ unzip file.zip
+```
+
+### 解压含中文的文件和文件夹名的压缩包
+
+```shell
+unzip -O CP936  xxx.zip
+```
+
+可防止解压后含中文的文件和文件夹名是乱码
 
 ## RPM 包
 
+### 安装一个 rpm 包 package.rpm
+
 ```shell
-rpm -ivh package.rpm 安装一个rpm包
-rpm -ivh --nodeeps package.rpm 安装一个rpm包而忽略依赖关系警告
-rpm -U package.rpm 更新一个rpm包但不改变其配置文件
-rpm -F package.rpm 更新一个确定已经安装的rpm包
-rpm -e package_name.rpm 删除一个rpm包
-rpm -qa 显示系统中所有已经安装的rpm包
-rpm -qa | grep httpd 显示所有名称中包含 "httpd" 字样的rpm包
-rpm -qi package_name 获取一个已安装包的特殊信息
-rpm -qg "System Environment/Daemons" 显示一个组件的rpm包
-rpm -ql package_name 显示一个已经安装的rpm包提供的文件列表
-rpm -qc package_name 显示一个已经安装的rpm包提供的配置文件列表
-rpm -q package_name --whatrequires 显示与一个rpm包存在依赖关系的列表
-rpm -q package_name --whatprovides 显示一个rpm包所占的体积
-rpm -q package_name --scripts 显示在安装/删除期间所执行的脚本l
-rpm -q package_name --changelog 显示一个rpm包的修改历史
-rpm -qf /etc/httpd/conf/httpd.conf 确认所给的文件由哪个rpm包所提供
-rpm -qp package.rpm -l 显示由一个尚未安装的rpm包提供的文件列表
-rpm --import /media/cdrom/RPM-GPG-KEY 导入公钥数字证书
-rpm --checksig package.rpm 确认一个rpm包的完整性
-rpm -qa gpg-pubkey 确认已安装的所有rpm包的完整性
-rpm -V package_name 检查文件尺寸、 许可、类型、所有者、群组、MD5检查以及最后修改时间
-rpm -Va 检查系统中所有已安装的rpm包- 小心使用
-rpm -Vp package.rpm 确认一个rpm包还未安装
-rpm2cpio package.rpm | cpio --extract --make-directories *bin* 从一个rpm包运行可执行文件
-rpm -ivh /usr/src/redhat/RPMS/`arch`/package.rpm 从一个rpm源码安装一个构建好的包
-rpmbuild --rebuild package_name.src.rpm 从一个rpm源码构建一个 rpm 包
+$ rpm -ivh package.rpm
+```
+
+### 安装一个 rpm 包而忽略依赖关系警告
+
+```shell
+$ rpm -ivh --nodeeps package.rpm
+```
+
+### 更新一个 rpm 包但不改变其配置文件
+
+```shell
+$ rpm -U package.rpm
+```
+
+### 更新一个确定已经安装的 rpm 包
+
+```shell
+$ rpm -F package.rpm
+```
+
+### 删除一个 rpm 包
+
+```shell
+$ rpm -e package.rpm
+```
+
+### 显示系统中所有已经安装的 rpm 包
+
+```shell
+$ rpm -qa
+```
+
+### 显示所有名称中包含 httpd 字样的 rpm 包
+
+```shell
+$ rpm -qa | grep httpd
+```
+
+### 获取一个已安装包 package 的特殊信息
+
+```shell
+$ rpm -qi package
+```
+
+### 显示一个组件的 rpm 包
+
+```shell
+$ rpm -qg "System Environment/Daemons"
+```
+
+### 显示一个已经安装的 rpm 包 package 提供的文件列表
+
+```shell
+$ rpm -ql package
+```
+
+### 显示一个已经安装的 rpm 包 package 提供的配置文件列表
+
+```shell
+$ rpm -qc package
+```
+
+### 显示与一个 rpm 包 package 存在依赖关系的列表
+
+```shell
+$ rpm -q package --whatrequires
+```
+
+### 显示一个 rpm 包 package 所占的体积
+
+```shell
+$ rpm -q package --whatprovides
+```
+
+### 显示在安装/删除期间所执行的脚本
+
+```shell
+$ rpm -q package --scripts
+```
+
+### 显示一个 rpm 包 package 的修改历史
+
+```shell
+$ rpm -q package --changelog
+```
+
+### 确认所给的文件由哪个 rpm 包所提供
+
+```shell
+$ rpm -qf /etc/httpd/conf/httpd.conf
+```
+
+### 显示由一个尚未安装的 rpm 包提供的文件列表
+
+```shell
+$ rpm -qp package.rpm -l
+```
+
+### 导入公钥数字证书
+
+```shell
+$ rpm --import /media/cdrom/RPM-GPG-KEY
+```
+
+### 确认一个 rpm 包的完整性
+
+```shell
+$ rpm --checksig package.rpm
+```
+
+### 确认已安装的所有 rpm 包的完整性
+
+```shell
+$ rpm -qa gpg-pubkey
+```
+
+### 检查文件 package 尺寸、 许可、类型、所有者、群组、MD5检查以及最后修改时间
+
+```shell
+$ rpm -V package
+```
+
+### 检查系统中所有已安装的 rpm 包
+
+```shell
+$ rpm -Va
+```
+
+小心使用
+
+### 确认一个 rpm 包还未安装
+
+```shell
+$ rpm -Vp package.rpm
+```
+
+### 从一个 rpm 包运行可执行文件
+
+```shell
+$ rpm2cpio package.rpm | cpio --extract --make-directories *bin*
+```
+
+### 从一个 rpm 源码安装一个构建好的包
+
+```shell
+$ rpm -ivh /usr/src/redhat/RPMS/`arch`/package.rpm
+```
+
+### 从一个 rpm 源码构建一个 rpm 包
+
+```shell
+$ rpmbuild --rebuild package.src.rpm
 ```
 
 ## YUM 软件包升级器
 
+### 下载并安装一个 rpm 包
+
 ```shell
-yum install package_name 下载并安装一个rpm包
-yum localinstall package_name.rpm 将安装一个rpm包，使用你自己的软件仓库为你解决所有依赖关系
-yum update package_name.rpm 更新当前系统中所有安装的rpm包
-yum update package_name 更新一个rpm包
-yum remove package_name 删除一个rpm包
-yum list 列出当前系统中安装的所有包
-yum search package_name 在rpm仓库中搜寻软件包
-yum clean packages 清理rpm缓存删除下载的包
-yum clean headers 删除所有头文件
-yum clean all 删除所有缓存的包和头文件
+$ yum install package
+```
+
+### 将安装一个 rpm 包，使用你自己的软件仓库为你解决所有依赖关系
+
+```shell
+$ yum localinstall package.rpm
+```
+
+### 更新当前系统中所有安装的 rpm 包
+
+```shell
+$ yum update package.rpm
+```
+
+### 更新一个 rpm 包
+
+```shell
+$ yum update package
+```
+
+### 删除一个 rpm 包
+
+```shell
+$ yum remove package
+```
+
+### 列出当前系统中安装的所有包
+
+```shell
+$ yum list
+```
+
+### 在 rpm 仓库中搜寻软件包
+
+```shell
+$ yum search package
+```
+
+### 清理 rpm 缓存删除下载的包
+
+```shell
+$ yum clean packages
+```
+
+### 删除所有头文件
+
+```shell
+$ yum clean headers
+```
+
+### 删除所有缓存的包和头文件
+
+```shell
+$ yum clean all
 ```
 
 ## deb 包
 
+### 安装/更新一个 deb 包
+
 ```shell
-dpkg -i package.deb 安装/更新一个 deb 包
-dpkg -r package_name 从系统删除一个 deb 包
-dpkg -l 显示系统中所有已经安装的 deb 包
-dpkg -l | grep httpd 显示所有名称中包含 "httpd" 字样的deb包
-dpkg -s package_name 获得已经安装在系统中一个特殊包的信息
-dpkg -L package_name 显示系统中已经安装的一个deb包所提供的文件列表
-dpkg --contents package.deb 显示尚未安装的一个包所提供的文件列表
-dpkg -S /bin/ping 确认所给的文件由哪个deb包提供
-APT 软件工具 (Debian, Ubuntu 以及类似系统)
-apt-get install package_name 安装/更新一个 deb 包
-apt-cdrom install package_name 从光盘安装/更新一个 deb 包
-apt-get update 升级列表中的软件包
-apt-get upgrade 升级所有已安装的软件
-apt-get remove package_name 从系统删除一个deb包
-apt-get check 确认依赖的软件仓库正确
-apt-get clean 从下载的软件包中清理缓存
-apt-cache search searched-package 返回包含所要搜索字符串的软件包名称
+$ dpkg -i package.deb
+```
+
+### 从系统删除一个 deb 包
+
+```shell
+$ dpkg -r package
+```
+
+### 显示系统中所有已经安装的 deb 包
+
+```shell
+$ dpkg -l
+```
+
+### 显示所有名称中包含 httpd 字样的 deb 包
+
+```shell
+$ dpkg -l | grep httpd
+```
+
+### 获得已经安装在系统中一个特殊包的信息
+
+```shell
+$ dpkg -s package
+```
+
+### 显示系统中已经安装的一个 deb 包所提供的文件列表
+
+```shell
+$ dpkg -L package 
+```
+
+### 显示尚未安装的一个包所提供的文件列表
+
+```shell
+$ dpkg --contents package.deb
+```
+
+### 确认所给的文件由哪个 deb 包提供
+
+```shell
+$ dpkg -S /bin/ping
+```
+
+### 软件工具
+
+```shell
+$ APT
+```
+
+Debian, Ubuntu 以及类似系统
+
+### 安装/更新一个 deb 包
+
+```shell
+$ apt-get install package
+```
+
+### 从光盘安装/更新一个 deb 包
+
+```shell
+$ apt-cdrom install package
+```
+
+### 升级列表中的软件包
+
+```shell
+$ apt-get update
+```
+
+### 升级所有已安装的软件
+
+```shell
+$ apt-get upgrade
+```
+
+### 从系统删除一个deb包
+
+```shell
+$ apt-get remove package
+```
+
+### 确认依赖的软件仓库正确
+
+```shell
+$ apt-get check
+```
+
+### 从下载的软件包中清理缓存
+
+```shell
+$ apt-get clean
+```
+
+### 返回包含所要搜索字符串的软件包名称
+
+```shell
+$ apt-cache search searched-package
 ```
 
 ## 查看文件内容
 
+### 从第一个字节开始正向查看文件的内容
+
 ```shell
-cat file1 从第一个字节开始正向查看文件的内容
-tac file1 从最后一行开始反向查看一个文件的内容
-more file1 查看一个长文件的内容
-less file1 类似于 'more' 命令，但是它允许在文件中和正向操作一样的反向操作
-head -2 file1 查看一个文件的前两行
-tail -2 file1 查看一个文件的最后两行
-tail -f /var/log/messages 实时查看被添加到一个文件中的内容
+$ cat file1
+```
+
+### 从最后一行开始反向查看一个文件的内容
+
+```shell
+$ tac file1
+```
+
+### 查看一个长文件的内容
+
+```shell
+$ more file1
+```
+
+### 类似于 'more' 命令，但是它允许在文件中和正向操作一样的反向操作
+
+```shell
+$ less file1
+```
+
+### 查看一个文件的前两行
+
+```shell
+$ head -2 file1
+```
+
+### 查看一个文件的最后两行
+
+```shell
+$ tail -2 file1
+```
+
+### 实时查看被添加到一个文件中的内容
+
+```shell
+$ tail -f /var/log/messages
 ```
 
 ## 文本处理
 
+### 合并一个文件的详细说明文本，并将简介写入一个新文件中
+
 ```shell
-cat file1 file2 ... | command <> file1_in.txt_or_file1_out.txt general syntax for text manipulation using PIPE, STDIN and STDOUT
-cat file1 | command( sed, grep, awk, grep, etc...) > result.txt 合并一个文件的详细说明文本，并将简介写入一个新文件中
-cat file1 | command( sed, grep, awk, grep, etc...) >> result.txt 合并一个文件的详细说明文本，并将简介写入一个已有的文件中
-grep Aug /var/log/messages 在文件 '/var/log/messages'中查找关键词"Aug"
-grep ^Aug /var/log/messages 在文件 '/var/log/messages'中查找以"Aug"开始的词汇
-grep [0-9] /var/log/messages 选择 '/var/log/messages' 文件中所有包含数字的行
-grep Aug -R /var/log/* 在目录 '/var/log' 及随后的目录中搜索字符串"Aug"
-sed 's/stringa1/stringa2/g' example.txt 将example.txt文件中的 "string1" 替换成 "string2"
-sed '/^$/d' example.txt 从example.txt文件中删除所有空白行
-sed '/ *#/d; /^$/d' example.txt 从example.txt文件中删除所有注释和空白行
-echo 'esempio' | tr '[:lower:]' '[:upper:]' 合并上下单元格内容
-sed -e '1d' result.txt 从文件example.txt 中排除第一行
-sed -n '/stringa1/p' 查看只包含词汇 "string1"的行
-sed -e 's/ *$//' example.txt 删除每一行最后的空白字符
-sed -e 's/stringa1//g' example.txt 从文档中只删除词汇 "string1" 并保留剩余全部
-sed -n '1,5p;5q' example.txt 查看从第一行到第5行内容
-sed -n '5p;5q' example.txt 查看第5行
-sed -e 's/00*/0/g' example.txt 用单个零替换多个零
-cat -n file1 标示文件的行数
-cat example.txt | awk 'NR%2==1' 删除example.txt文件中的所有偶数行
-echo a b c | awk '{print $1}' 查看一行第一栏
-echo a b c | awk '{print $1,$3}' 查看一行的第一和第三栏
-paste file1 file2 合并两个文件或两栏的内容
-paste -d '+' file1 file2 合并两个文件或两栏的内容，中间用"+"区分
-sort file1 file2 排序两个文件的内容
-sort file1 file2 | uniq 取出两个文件的并集(重复的行只保留一份)
-sort file1 file2 | uniq -u 删除交集，留下其他的行
-sort file1 file2 | uniq -d 取出两个文件的交集(只留下同时存在于两个文件中的文件)
-comm -1 file1 file2 比较两个文件的内容只删除 'file1' 所包含的内容
-comm -2 file1 file2 比较两个文件的内容只删除 'file2' 所包含的内容
-comm -3 file1 file2 比较两个文件的内容只删除两个文件共有的部分
+$ cat file1 | command( sed, grep, awk, grep, etc...) > result.txt
+```
+
+### 合并一个文件的详细说明文本，并将简介写入一个已有的文件中
+
+```shell
+$ cat file1 | command( sed, grep, awk, grep, etc...) >> result.txt
+```
+
+### 在文件 '/var/log/messages'中查找关键词"Aug"
+
+```shell
+$ grep Aug /var/log/messages
+```
+
+### 在文件 '/var/log/messages'中查找以"Aug"开始的词汇
+
+```shell
+$ grep ^Aug /var/log/messages
+```
+
+### 选择 '/var/log/messages' 文件中所有包含数字的行
+
+```shell
+$ grep [0-9] /var/log/messages
+```
+
+### 在目录 '/var/log' 及随后的目录中搜索字符串"Aug"
+
+```shell
+$ grep Aug -R /var/log/*
+```
+
+### 将example.txt文件中的 "string1" 替换成 "string2"
+
+```shell
+$ sed 's/stringa1/stringa2/g' example.txt
+```
+
+### 从example.txt文件中删除所有空白行
+
+```shell
+$ sed '/^$/d' example.txt
+```
+
+### 合并上下单元格内容
+
+```shell
+$ echo 'esempio' | tr '[:lower:]' '[:upper:]'
+```
+
+### 从文件example.txt 中排除第一行
+
+```shell
+$ sed -e '1d' result.txt
+```
+
+### 查看只包含词汇 "string1"的行
+
+```shell
+$ sed -n '/stringa1/p'
+```
+
+### 删除每一行最后的空白字符
+
+```shell
+$ sed -e 's/ *$//' example.txt
+```
+
+### 从文档中只删除词汇 "string1" 并保留剩余全部
+
+```shell
+$ sed -e 's/stringa1//g' example.txt
+```
+
+### 查看从第一行到第5行内容
+
+```shell
+$ sed -n '1,5p;5q' example.txt
+```
+
+### 查看第5行
+
+```shell
+$ sed -n '5p;5q' example.txt
+```
+
+### 用单个零替换多个零
+
+```shell
+$ sed -e 's/00*/0/g' example.txt
+```
+
+### 标示文件的行数
+
+```shell
+$ cat -n file1
+```
+
+### 删除example.txt文件中的所有偶数行
+
+```shell
+$ cat example.txt | awk 'NR%2==1'
+```
+
+### 查看一行第一栏
+
+```shell
+$ echo a b c | awk '{print $1}'
+```
+
+### 查看一行的第一和第三栏
+
+```shell
+$ echo a b c | awk '{print $1,$3}'
+```
+
+### 合并两个文件或两栏的内容
+
+```shell
+$ paste file1 file2
+```
+
+### 合并两个文件或两栏的内容，中间用"+"区分
+
+```shell
+$ paste -d '+' file1 file2
+```
+
+### 排序两个文件的内容
+
+```shell
+$ sort file1 file2
+```
+
+### 取出两个文件的并集(重复的行只保留一份)
+
+```shell
+$ sort file1 file2 | uniq
+```
+
+### 删除交集，留下其他的行
+
+```shell
+$ sort file1 file2 | uniq -u
+```
+
+### 取出两个文件的交集(只留下同时存在于两个文件中的文件)
+
+```shell
+$ sort file1 file2 | uniq -d
+```
+
+### 比较两个文件的内容只删除 'file1' 所包含的内容
+
+```shell
+$ comm -1 file1 file2
+```
+
+### 比较两个文件的内容只删除 'file2' 所包含的内容
+
+```shell
+$ comm -2 file1 file2
+```
+
+### 比较两个文件的内容只删除两个文件共有的部分
+
+```shell
+$ comm -3 file1 file2
 ```
 
 ## 字符设置和文件格式转换
 
+### 将一个文本文件的格式从MSDOS转换成UNIX
+
 ```shell
-dos2unix filedos.txt fileunix.txt 将一个文本文件的格式从MSDOS转换成UNIX
-unix2dos fileunix.txt filedos.txt 将一个文本文件的格式从UNIX转换成MSDOS
-recode ..HTML < page.txt > page.html 将一个文本文件转换成html
-recode -l | more 显示所有允许的转换格式
+$ dos2unix filedos.txt fileunix.txt
+```
+
+### 将一个文本文件的格式从UNIX转换成MSDOS
+
+```shell
+$ unix2dos fileunix.txt filedos.txt
+```
+
+### 将一个文本文件转换成html
+
+```shell
+$ recode ..HTML < page.txt > page.html
+```
+
+### 显示所有允许的转换格式
+
+```shell
+$ recode -l | more
 ```
 
 ## 文件系统分析
 
+### 检查磁盘hda1上的坏磁块
+
 ```shell
-badblocks -v /dev/hda1 检查磁盘hda1上的坏磁块
-fsck /dev/hda1 修复/检查hda1磁盘上linux文件系统的完整性
-fsck.ext2 /dev/hda1 修复/检查hda1磁盘上ext2文件系统的完整性
-e2fsck /dev/hda1 修复/检查hda1磁盘上ext2文件系统的完整性
-e2fsck -j /dev/hda1 修复/检查hda1磁盘上ext3文件系统的完整性
-fsck.ext3 /dev/hda1 修复/检查hda1磁盘上ext3文件系统的完整性
-fsck.vfat /dev/hda1 修复/检查hda1磁盘上fat文件系统的完整性
-fsck.msdos /dev/hda1 修复/检查hda1磁盘上dos文件系统的完整性
-dosfsck /dev/hda1 修复/检查hda1磁盘上dos文件系统的完整性
+$ badblocks -v /dev/hda1
+```
+
+### 修复/检查hda1磁盘上linux文件系统的完整性
+
+```shell
+$ fsck /dev/hda1
+```
+
+### 修复/检查hda1磁盘上ext2文件系统的完整性
+
+```shell
+$ fsck.ext2 /dev/hda1
+```
+
+### 修复/检查hda1磁盘上ext2文件系统的完整性
+
+```shell
+$ e2fsck /dev/hda1
+```
+
+### 修复/检查hda1磁盘上ext3文件系统的完整性
+
+```shell
+$ e2fsck -j /dev/hda1
+```
+
+### 修复/检查hda1磁盘上ext3文件系统的完整性
+
+```shell
+$ fsck.ext3 /dev/hda1
+```
+
+### 修复/检查hda1磁盘上fat文件系统的完整性
+
+```shell
+$ fsck.vfat /dev/hda1
+```
+
+### 修复/检查hda1磁盘上dos文件系统的完整性
+
+```shell
+$ fsck.msdos /dev/hda1
+```
+
+### 修复/检查hda1磁盘上dos文件系统的完整性
+
+```shell
+$ dosfsck /dev/hda1
 ```
 
 ## 初始化一个文件系统
 
+### 在hda1分区创建一个文件系统
+
 ```shell
-mkfs /dev/hda1 在hda1分区创建一个文件系统
-mke2fs /dev/hda1 在hda1分区创建一个linux ext2的文件系统
-mke2fs -j /dev/hda1 在hda1分区创建一个linux ext3(日志型)的文件系统
-mkfs -t vfat 32 -F /dev/hda1 创建一个 FAT32 文件系统
-fdformat -n /dev/fd0 格式化一个软盘
-mkswap /dev/hda3 创建一个swap文件系统
+$ mkfs /dev/hda1
+```
+
+### 在hda1分区创建一个linux ext2的文件系统
+
+```shell
+$ mke2fs /dev/hda1
+```
+
+### 在hda1分区创建一个linux ext3(日志型)的文件系统
+
+```shell
+$ mke2fs -j /dev/hda1
+```
+
+### 创建一个 FAT32 文件系统
+
+```shell
+$ mkfs -t vfat 32 -F /dev/hda1
+```
+
+### 格式化一个软盘
+
+```shell
+$ fdformat -n /dev/fd0
 ```
 
 ## SWAP文件系统
 
+### 创建一个swap文件系统
+
 ```shell
-mkswap /dev/hda3 创建一个swap文件系统
-swapon /dev/hda3 启用一个新的swap文件系统
-swapon /dev/hda2 /dev/hdb3 启用两个swap分区
+$ mkswap /dev/hda3
+```
+
+### 启用一个新的swap文件系统
+
+```shell
+$ swapon /dev/hda3
+```
+
+### 启用两个swap分区
+
+```shell
+$ swapon /dev/hda2 /dev/hdb3
 ```
 
 ## 备份
 
+### 制作一个 '/home' 目录的完整备份
+
 ```shell
-dump -0aj -f /tmp/home0.bak /home 制作一个 '/home' 目录的完整备份
-dump -1aj -f /tmp/home0.bak /home 制作一个 '/home' 目录的交互式备份
-restore -if /tmp/home0.bak 还原一个交互式备份
-rsync -rogpav --delete /home /tmp 同步两边的目录
-rsync -rogpav -e ssh --delete /home ip_address:/tmp 通过SSH通道rsync
-rsync -az -e ssh --delete ip_addr:/home/public /home/local 通过ssh和压缩将一个远程目录同步到本地目录
-rsync -az -e ssh --delete /home/local ip_addr:/home/public 通过ssh和压缩将本地目录同步到远程目录
-dd bs=1M if=/dev/hda | gzip | ssh user@ip_addr 'dd of=hda.gz' 通过ssh在远程主机上执行一次备份本地磁盘的操作
-dd if=/dev/sda of=/tmp/file1 备份磁盘内容到一个文件
-tar -Puf backup.tar /home/user 执行一次对 '/home/user' 目录的交互式备份操作
-( cd /tmp/local/ && tar c . ) | ssh -C user@ip_addr 'cd /home/share/ && tar x -p' 通过ssh在远程目录中复制一个目录内容
-( tar c /home ) | ssh -C user@ip_addr 'cd /home/backup-home && tar x -p' 通过ssh在远程目录中复制一个本地目录
-tar cf - . | (cd /tmp/backup ; tar xf - ) 本地将一个目录复制到另一个地方，保留原有权限及链接
-find /home/user1 -name '*.txt' | xargs cp -av --target-directory=/home/backup/ --parents 从一个目录查找并复制所有以 '.txt' 结尾的文件到另一个目录
-find /var/log -name '*.log' | tar cv --files-from=- | bzip2 > log.tar.bz2 查找所有以 '.log' 结尾的文件并做成一个bzip包
-dd if=/dev/hda of=/dev/fd0 bs=512 count=1 做一个将 MBR (Master Boot Record)内容复制到软盘的动作
-dd if=/dev/fd0 of=/dev/hda bs=512 count=1 从已经保存到软盘的备份中恢复MBR内容
+$ dump -0aj -f /tmp/home0.bak /home
+```
+
+### 制作一个 '/home' 目录的交互式备份
+
+```shell
+$ dump -1aj -f /tmp/home0.bak /home
+```
+
+### 还原一个交互式备份
+
+```shell
+$ restore -if /tmp/home0.bak
+```
+
+### 同步两边的目录
+
+```shell
+$ rsync -rogpav --delete /home /tmp
+```
+
+### 通过SSH通道rsync
+
+```shell
+$ rsync -rogpav -e ssh --delete /home ip_address:/tmp
+```
+
+### 通过ssh和压缩将一个远程目录同步到本地目录
+
+```shell
+$ rsync -az -e ssh --delete ip_addr:/home/public /home/local
+```
+
+### 通过ssh和压缩将本地目录同步到远程目录
+
+```shell
+$ rsync -az -e ssh --delete /home/local ip_addr:/home/public
+```
+
+### 通过ssh在远程主机上执行一次备份本地磁盘的操作
+
+```shell
+$ dd bs=1M if=/dev/hda | gzip | ssh user@ip_addr 'dd of=hda.gz'
+```
+
+### 备份磁盘内容到一个文件
+
+```shell
+$ dd if=/dev/sda of=/tmp/file1
+```
+
+### 执行一次对 '/home/user' 目录的交互式备份操作
+
+```shell
+$ tar -Puf backup.tar /home/user
+```
+
+### 通过ssh在远程目录中复制一个目录内容
+
+```shell
+$ ( cd /tmp/local/ && tar c . ) | ssh -C user@ip_addr 'cd /home/share/ && tar x -p'
+```
+
+### 通过ssh在远程目录中复制一个本地目录
+
+```shell
+$ ( tar c /home ) | ssh -C user@ip_addr 'cd /home/backup-home && tar x -p'
+```
+
+### 本地将一个目录复制到另一个地方，保留原有权限及链接
+
+```shell
+$ tar cf - . | (cd /tmp/backup ; tar xf - )
+```
+
+### 从一个目录查找并复制所有以 '.txt' 结尾的文件到另一个目录
+
+```shell
+$ find /home/user1 -name '*.txt' | xargs cp -av --target-directory=/home/backup/ --parents
+```
+
+### 查找所有以 '.log' 结尾的文件并做成一个bzip包
+
+```shell
+$ find /var/log -name '*.log' | tar cv --files-from=- | bzip2 > log.tar.bz2
+```
+
+### 做一个将 MBR (Master Boot Record)内容复制到软盘的动作
+
+```shell
+$ dd if=/dev/hda of=/dev/fd0 bs=512 count=1
+```
+
+### 从已经保存到软盘的备份中恢复MBR内容
+
+```shell
+$ dd if=/dev/fd0 of=/dev/hda bs=512 count=1
 ```
 
 ## 光盘
 
+### 清空一个可复写的光盘内容
+
 ```shell
-cdrecord -v gracetime=2 dev=/dev/cdrom -eject blank=fast -force 清空一个可复写的光盘内容
-mkisofs /dev/cdrom > cd.iso 在磁盘上创建一个光盘的iso镜像文件
-mkisofs /dev/cdrom | gzip > cd_iso.gz 在磁盘上创建一个压缩了的光盘iso镜像文件
-mkisofs -J -allow-leading-dots -R -V "Label CD" -iso-level 4 -o ./cd.iso data_cd 创建一个目录的iso镜像文件
-cdrecord -v dev=/dev/cdrom cd.iso 刻录一个ISO镜像文件
-gzip -dc cd_iso.gz | cdrecord dev=/dev/cdrom - 刻录一个压缩了的ISO镜像文件
-mount -o loop cd.iso /mnt/iso 挂载一个ISO镜像文件
-cd-paranoia -B 从一个CD光盘转录音轨到 wav 文件中
-cd-paranoia -- "-3" 从一个CD光盘转录音轨到 wav 文件中（参数-3）
-cdrecord --scanbus 扫描总线以识别scsi通道
-dd if=/dev/hdc | md5sum 校验一个设备的md5sum编码，例如一张 CD
+$ cdrecord -v gracetime=2 dev=/dev/cdrom -eject blank=fast -force
+```
+
+### 在磁盘上创建一个光盘的iso镜像文件
+
+```shell
+$ mkisofs /dev/cdrom > cd.iso
+```
+
+### 在磁盘上创建一个压缩了的光盘iso镜像文件
+
+```shell
+$ mkisofs /dev/cdrom | gzip > cd_iso.gz
+```
+
+### 创建一个目录的iso镜像文件
+
+```shell
+$ mkisofs -J -allow-leading-dots -R -V "Label CD" -iso-level 4 -o ./cd.iso data_cd
+```
+
+### 刻录一个ISO镜像文件
+
+```shell
+$ cdrecord -v dev=/dev/cdrom cd.iso
+```
+
+### 刻录一个压缩了的ISO镜像文件
+
+```shell
+$ gzip -dc cd_iso.gz | cdrecord dev=/dev/cdrom -
+```
+
+### 挂载一个ISO镜像文件
+
+```shell
+$ mount -o loop cd.iso /mnt/iso
+```
+
+### 从一个CD光盘转录音轨到 wav 文件中
+
+```shell
+$ cd-paranoia -B
+```
+
+### 从一个CD光盘转录音轨到 wav 文件中（参数-3）
+
+```shell
+$ cd-paranoia -- "-3"
+```
+
+### 扫描总线以识别scsi通道
+
+```shell
+$ cdrecord --scanbus
+```
+
+### 校验一个设备的md5sum编码，例如一张 CD
+
+```shell
+$ dd if=/dev/hdc | md5sum
 ```
 
 ## 网络（以太网和WIFI无线）
 
+### 显示一个以太网卡的配置
+
 ```shell
-ifconfig eth0 显示一个以太网卡的配置
-ifup eth0 启用一个 'eth0' 网络设备
-ifdown eth0 禁用一个 'eth0' 网络设备
-ifconfig eth0 192.168.1.1 netmask 255.255.255.0 控制IP地址
-ifconfig eth0 promisc 设置 'eth0' 成混杂模式以嗅探数据包 (sniffing)
-dhclient eth0 以dhcp模式启用 'eth0'
+$ ifconfig eth0
+```
+
+### 启用一个 'eth0' 网络设备
+
+```shell
+$ ifup eth0
+```
+
+### 禁用一个 'eth0' 网络设备
+
+```shell
+$ ifdown eth0
+```
+
+### 控制IP地址
+
+```shell
+$ ifconfig eth0 192.168.1.1 netmask 255.255.255.0
+```
+
+### 设置 'eth0' 成混杂模式以嗅探数据包 (sniffing)
+
+```shell
+$ ifconfig eth0 promisc
+```
+
+### 以dhcp模式启用 'eth0'
+
+```shell
+$ dhclient eth0
+```
+
+```shell
 route -n show routing table
 route add -net 0/0 gw IP_Gateway configura default gateway
 route add -net 192.168.0.0 netmask 255.255.0.0 gw 192.168.1.1 configure static route to reach network '192.168.0.0/16'
@@ -1543,62 +2464,162 @@ whois www.example.com lookup on Whois database
 
 ## 列出目录内容
 
+### 显示所有文件(包括隐藏文件)
+
 ```shell
-ls -a：显示所有文件（包括隐藏文件）；
-ls -l：显示详细信息；
-ls -R：递归显示子目录结构；
-ls -ld：显示目录和链接信息；
-ctrl+r：历史记录中所搜命令（输入命令中的任意一个字符）；
-Linux中以.开头的文件是隐藏文件；
-pwd:显示当前目录
+$ ls -a
+```
+
+Linux 中以.开头的文件是隐藏文件
+
+### 显示详细信息
+
+```shell
+$ ls -l
+```
+
+### 递归显示子目录结构
+
+```shell
+$ ls -R
+```
+
+### 显示目录和链接信息
+
+```shell
+$ ls -ld
+```
+
+### 历史记录中所搜命令(输入命令中的任意一个字符)
+
+```shell
+$ ctrl+r
+```
+
+### 显示当前目录
+
+```shell
+$ pwd
 ```
 
 ## 查看文件的类型
 
+### 查看文件的类型
+
 ```shell
-file:查看文件的类型
+$ file
 ```
 
 ## 复制文件目录
 
-1、cp：复制文件和目录 cp源文件（文件夹）目标文件（文件夹）
+### cp
+
+cp: 复制文件和目录
 
 ```shell
-常用参数：-r:递归复制整个目录树；-v：显示详细信息；
-复制文件夹时要在cp命令后面加一个-r参数：
-如：cp -r 源文件夹  目标文件夹
+cp 源文件(文件夹) 目标文件(文件夹)
 ```
 
-2、touch+文件名：当文件不存在的时候，创建相应的文件；当文件存在的时候，修改文件的创建时间。
+常用参数:
 
 ```shell
+-r  递归复制整个目录树
+-v  显示详细信息
+```
+
+复制文件夹时要在 ```cp``` 命令后面加一个 ```-r``` 参数
+
+```shell
+cp -r 源文件夹 目标文件夹
+```
+
+### touch
+
+```shell
+touch+文件名
+```
+
+当文件不存在的时候，创建相应的文件；当文件存在的时候，修改文件的创建时间。
+
 功能：生成一个空文件或修改文件的存取/修改的时间记录值。
-touch * ：将当前下的文件时间修改为系统的当前时间
-touch –d 20040210 test：将test文件的日期改为20040210
-touch abc　：若abc文件存在，则修改为系统的当前时间；若不存在，则生成一个为当前时间的空文件
-```
 
-3、mv 文件 目标目录：移动或重命名文件或目录（如果指定文件名，则可以重命名文件）。可以将文件及目录移到另一目录下，或更改文件及目录的名称。
+将当前下的文件时间修改为系统的当前时间
 
 ```shell
-格式为：mv [参数]<源文件或目录> <目标文件或目录>
-mva.txt ../：将a.txt文件移动上层目录
-mv a.txt b.txt：将a.txt改名为b.txt
-mvdir2 ../：将dir2目录上移一层
+touch *
 ```
 
-4、rm：删除文件；
+将 test 文件的日期改为 20040210
 
 ```shell
-常用参数：-i：交互式   -r：递归的删除包括目录中的所有内容
+touch –d 20040210 test
 ```
 
-5、mkdir +文件夹名称：创建文件夹；
-
-6、rm -r +文件夹名称：删除文件夹（空文件夹和非空文件夹都可删除）
+若abc文件存在，则修改为系统的当前时间；若不存在，则生成一个为当前时间的空文件
 
 ```shell
-rmdir 文件夹名称：删除文件夹（只能删除空文件夹）
+touch abc　
+```
+
+### mv
+
+```shell
+mv 文件 目标目录
+```
+
+移动或重命名文件或目录(如果指定文件名，则可以重命名文件)。可以将文件及目录移到另一目录下，或更改文件及目录的名称。
+
+格式为：
+
+```shell
+mv [参数]<源文件或目录> <目标文件或目录>
+```
+
+将 a.txt 文件移动上层目录
+
+```shell
+mva.txt ../
+```
+
+将 a.txt 改名为 b.txt
+
+```shell
+mv a.txt b.txt
+```
+
+将 dir 目录上移一层
+
+```shell
+mv dir ../
+```
+
+### rm
+
+删除文件，常用参数：
+
+```shell
+-i  交互式   
+-r  递归的删除包括目录中的所有内容
+```
+
+删除文件夹(只能删除空文件夹)
+
+```shell
+rmdir 文件夹名称：
+```
+
+删除文件夹(空文件夹和非空文件夹都可删除)
+
+```shell
+rm -r 文件夹名称
+```
+
+### mkdir
+
+创建文件夹
+
+```shell
+mkdir 文件夹名称
 ```
 
 7、mkdir -p dir1/dir2 ：在当前目录下创建dir1目录，并在dir1目录下创建dir2目录， 也就是连续创建两个目录（dir1/和dir1/dir2）
