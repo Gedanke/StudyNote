@@ -20,7 +20,7 @@
     * [高级技巧之集群部署: 利用 Linux 指令同时在多台机器部署程序](notes/module_2/lecture_12.md)
     * [模块二练习题](notes/module_2/exercise.md)
 * [模块三](notes/module_3): 操作系统概述
-    * [操作系统内核: Linux 内核和 Windows 内核有什么区别](notes/module_3/lecture_14.md)
+    * [操作系统内核: Linux 内核和 Windows 内核有什么区别](notes/module_3/lecture_13.md)
     * [用户态和内核态: 用户态线程和内核态线程有什么区别](notes/module_3/lecture_14.md)
     * [中断和中断向量: Java/js 等语言为什么可以捕获到键盘输入](notes/module_3/lecture_15.md)
     * [操作系统: Win/Mac/Unix/Linux 的区别和联系](notes/module_3/lecture_16.md)
