@@ -1,6 +1,8 @@
 # readme
 
-这门课程的知识体系结构，分为 8 个模块，39 个课时，具体如下。
+本课程是拉勾教育之 [重学操作系统](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=478#/sale) 课程的学习笔记
+
+课程目录如下:
 
 * [开始](notes/begin.md)
 * [模块一](notes/module_1): 计算机组成原理

@@ -1,5 +1,9 @@
 # readme
 
+本课程是拉勾教育之 [计算机网络通关 29 讲](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=837&sid=20-h5Url-0&buyFrom=2&pageId=1pz4#/sale) 课程的学习笔记
+
+课程目录如下:
+
 * [开始](notes/begin.md)
 * [模块一](notes/module_1): 互联网和传输层协议
     * [漫游互联网: 什么是蜂窝移动网络](notes/module_1/lecture_1.md)

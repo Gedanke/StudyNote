@@ -42,19 +42,30 @@
 
 最后，给出一些课程相关的优秀文章博客:
 
-* [Nginx](https://mp.weixin.qq.com/s/Tzh-LSz6fQJxfYiN3u5U2g)
-* [Docker 常见疑难杂症解决方案](https://mp.weixin.qq.com/s/Oz7MaDc87heRUNf7z645zA)
-* [MySQL](https://mp.weixin.qq.com/s/yeIDU2m5EnC3AJNo-bKalQ)
-* [redis](https://mp.weixin.qq.com/s/A36j9OSug0H0ti30ebN6cA)
-* [操作系统和并发](https://mp.weixin.qq.com/s/Csy15_h1jUQZyFe_Gu1WZA)
-* [java class](https://mp.weixin.qq.com/s/pekAvJY84qSefHi69d3qgw)
-* [计算机的启动过程](https://mp.weixin.qq.com/s/cXbCd_nK4_VssJaUREiPmA)
+* [git](https://mp.weixin.qq.com/s/oiQ1xz0O6qZqPDgm0DRYdg)
+* [Git 和 GitHub 常用操作](https://mp.weixin.qq.com/s/mi6QHytTXoN7payD3qQOWw)
+* [SSH 使用详解](https://mp.weixin.qq.com/s/w6RfVTTAA19XuPpma-maqw)
+* [Docker](https://mp.weixin.qq.com/s/TYvBfbaI0n2781APvpF28A)
+* [搜索引擎](https://mp.weixin.qq.com/s/vIHifVUzst_dup7LCRTqtQ)
+* [Linux 命令](https://mp.weixin.qq.com/s/mphEmoh29nHwhtzOwByRgw)
+* [Redis 持久化](https://mp.weixin.qq.com/s/4fzNAHlkm6HPqt1SJg4pQw)
+* [文件系统](https://mp.weixin.qq.com/s/qJdoXTv_XS_4ts9YuzMNIw)
+* [Java 中的 21 种锁](https://mp.weixin.qq.com/s/1cWszX8MWXq_XNMXNyeDMg)
+* [键盘敲入 A 字母时，操作系统期间发生了什么](https://mp.weixin.qq.com/s/04BkLtnPBmmx6CtdQPXiRA)
+* [C 语言指针](https://mp.weixin.qq.com/s/d1ng1-AFFdPGLWDXVKPJZg)
+* [Redis](https://mp.weixin.qq.com/s/RBU5jRtoyxvhCMOr0V3XpQ)
 * [操作系统内存管理](https://mp.weixin.qq.com/s/5f3ku77xSO8UlaOsTkOnHQ)
 * [虚拟机逃逸](https://mp.weixin.qq.com/s/254yK8nt1T2yix7c7Pxi-A)
 * [软中断](https://mp.weixin.qq.com/s/Yjk_SnhZ6q3v55jcWM7kbQ)
 * [synchronized](https://mp.weixin.qq.com/s/8EGcLedfd5iongGF63ZfOg)
 * [缓存穿透、击穿、雪崩](https://mp.weixin.qq.com/s/hc7zO58ow2_ESv1ADDFslg)
-* ......
+* [计算机的启动过程](https://mp.weixin.qq.com/s/cXbCd_nK4_VssJaUREiPmA)
+* [Redis](https://mp.weixin.qq.com/s/mfm2RqKMqVv7iuv5dpxuYA)
+* [操作系统和并发](https://mp.weixin.qq.com/s/Csy15_h1jUQZyFe_Gu1WZA)
+* [redis](https://mp.weixin.qq.com/s/A36j9OSug0H0ti30ebN6cA)
+* [Docker 常见疑难杂症解决方案](https://mp.weixin.qq.com/s/Oz7MaDc87heRUNf7z645zA)
+* [操作系统面试题](https://mp.weixin.qq.com/s/lR_A3jbfRiRjchz_lyyKxw)
+* ...
 
 ---
 ---

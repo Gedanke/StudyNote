@@ -27,15 +27,27 @@
 
 给出一些课程相关的优质文章博客链接:
 
-* [常见的安全漏洞问题](https://mp.weixin.qq.com/s/J3ymMnX-dN02Stu-J7grFg)
+* [网络设备、网络地址规划、静态路由、实战演练](https://mp.weixin.qq.com/s/f8GFZTJJMQiKCPo4x8M96A)
+* [TCP 连接数量原理](https://mp.weixin.qq.com/s/X6c_H5_4OInR8nFQVn7IMA)
+* [Nginx](https://mp.weixin.qq.com/s/Tzh-LSz6fQJxfYiN3u5U2g)
+* [redis](https://mp.weixin.qq.com/s/A36j9OSug0H0ti30ebN6cA)
+* [TCP/IP](https://mp.weixin.qq.com/s/ru47rYTWz5XALoIFETDG8A)
+* [TCP](https://mp.weixin.qq.com/s/lU5uPfhFECrX-0_hML98BQ)
 * [TCP、HTTP、Socket、Socket 连接池](https://mp.weixin.qq.com/s/00wm0tzz8Q1kUIQSlLXnUA)
 * [TCP/IP](https://mp.weixin.qq.com/s/F1KMQPdf8rj3EmElmn-dJw)
 * [Cookie、Session、Token、JWT](https://mp.weixin.qq.com/s/mE5A5V3JezihWDxXXzHABQ)
 * [IP 基础知识](https://mp.weixin.qq.com/s/qydIO7NDfFTYs4-ZZlfgRg)
 * [TCP 三次握手和四次挥手](https://mp.weixin.qq.com/s/tH8RFmjrveOmgLvk9hmrkw)
 * [HTTPS](https://mp.weixin.qq.com/s/U6pOP6C2XVeHrJUPFv69OQ)
+* [100 个网络基础知识普及](https://mp.weixin.qq.com/s/YEmGCcp5YTZKJYu8N_gljg)
+* [HTTP](https://mp.weixin.qq.com/s/ZlqotT7upeqC-JOwYVqM5g)
 * [当你输入一个网址后回车，实际会发生什么？](https://mp.weixin.qq.com/s/YiFoO_7fntwh-8URTdyBYw)
 * [一个浏览器是如何工作的](https://mp.weixin.qq.com/s/SAk4DgOq-YUzN96ZQKqYqA)
 * [网络原来是这样连接的](https://mp.weixin.qq.com/s/4TXzZea0bL7PYz8mPLR6nA)
+* [postman](https://mp.weixin.qq.com/s/eCeh0rLjaqdBvvu-RffqMg)
+* [app 抓包](https://mp.weixin.qq.com/s/ZIQAgFQARZBHO2P8mAUeUQ)
 * ...
+
+---
+---
 
