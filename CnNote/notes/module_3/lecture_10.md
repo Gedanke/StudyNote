@@ -13,7 +13,7 @@
 
 首先，Socket 是一种编程的模型。
 
-下图中，从编程的角度来看，客户端将数据发送给在客户端侧的Socket 对象，然后客户端侧的 Socket 对象将数据发送给服务端侧的 Socket 对象。Socket 对象负责提供通信能力，并处理底层的 TCP 连接/UDP
+下图中，从编程的角度来看，客户端将数据发送给在客户端侧的 Socket 对象，然后客户端侧的 Socket 对象将数据发送给服务端侧的 Socket 对象。Socket 对象负责提供通信能力，并处理底层的 TCP 连接 UDP
 连接。对服务端而言，每一个客户端接入，就会形成一个和客户端对应的 Socket 对象，如果服务器要读取客户端发送的信息，或者向客户端发送信息，就需要通过这个客户端 Socket 对象。
 
 ![](../../images/module_3/10_1.png)
@@ -22,7 +22,7 @@
 
 比如下面这段服务端侧程序:
 
-```javascript
+```java
 var serverSocket = new ServerSocket();
 serverSocket.bind(new InetSocketAddress(80));
 ```
@@ -135,7 +135,7 @@ Socket 文件中。
 
 ## 思考题
 
-最后再给出一道思考题目: 请你找一个 epoll 的 hello world 例子，并尝试理解它。
+最后再给出一道思考题: 请你找一个 epoll 的 hello world 例子，并尝试理解它。
 
 ---
 ---

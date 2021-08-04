@@ -7,13 +7,14 @@
 
 ## 06 | IPv4 协议: 路由和寻址的区别是什么
 
-下面这几个地址 127.0.0.1, localhost, 0.0.0.0 有什么不同？
+下面这几个地址 127.0.0.1，localhost，0.0.0.0 有什么不同？
 
 127.0.0.1 是本地回环地址(loopback)，发送到 loopback 的数据会被转发到本地应用。
 
 localhost 指代的是本地计算机，用于访问绑定在 loopback 上的服务。localhost 是一个主机名，不仅仅可以指向 IPv4 的本地回环地址，也可以指向 IPv6 的本地回环地址 [::1]。
 
-0.0.0.0 是一个特殊目的 IP 地址，称作不可路由 IP 地址，它的用途会被特殊规定。通常情况下，把一个服务绑定到 0.0.0.0，相当于把服务绑定到任意的 IP 地址。比如一台服务器上有多个网卡，不同网卡连接不同的网络，如果服务绑定到 0.0.0.0 就可以保证服务在多个 IP 地址上都可以用。
+0.0.0.0 是一个特殊目的 IP 地址，称作不可路由 IP 地址，它的用途会被特殊规定。通常情况下，把一个服务绑定到 0.0.0.0，相当于把服务绑定到任意的 IP
+地址。比如一台服务器上有多个网卡，不同网卡连接不同的网络，如果服务绑定到 0.0.0.0 就可以保证服务在多个 IP 地址上都可以用。
 
 ---
 
@@ -27,9 +28,11 @@ IPv6 和 IPv4 最核心的区别是地址空间大小不同。IPv6 用 128 位�
 
 在划分子网的时候，IPv4 地址少，需要子网掩码来处理划分子网。IPv6 有充足的地址，因此不需要局域网共享外网 IP。也正因为 IPv6 地址多，可以直接将 IPv6 地址划分成站点、子网、设备，每个段都有充足的 IP 地址。
 
-因为 IPv6 支持的 IP 地址数量大大上升，一个子网可以有 248 个 IP 地址，这个子网可能是公司网络、家庭网络等。这样 IP 地址的分配方式也发生了变化，IPv4 网络中设备分配 IP 地址的方式是中心化的，由 DHCP(动态主机协议)为局域网中的设备分配 IP 地址。而在 IPv6 网络中，因为 IP 地址很少发生冲突，可以由设备自己申请自己的 IP 地址。
+因为 IPv6 支持的 IP 地址数量大大上升，一个子网可以有 248 个 IP 地址，这个子网可能是公司网络、家庭网络等。这样 IP 地址的分配方式也发生了变化，IPv4 网络中设备分配 IP 地址的方式是中心化的，由 DHCP(
+动态主机协议)为局域网中的设备分配 IP 地址。而在 IPv6 网络中，因为 IP 地址很少发生冲突，可以由设备自己申请自己的 IP 地址。
 
-另外因为 IPv6 中任何一个节点都可以是一个组播节点，这样就可以构造一个对等的网络，也就是可以支持在没有中心化的路由器，或者一个网络多个路由器的情况下工作。节点可以通过向周围节点类似打探消息的方式，发现更多的节点。这是一个配套 IPv6 的能力，叫作邻居发现(ND)。
+另外因为 IPv6 中任何一个节点都可以是一个组播节点，这样就可以构造一个对等的网络，也就是可以支持在没有中心化的路由器，或者一个网络多个路由器的情况下工作。节点可以通过向周围节点类似打探消息的方式，发现更多的节点。这是一个配套 IPv6
+的能力，叫作邻居发现(ND)。
 
 ---
 
@@ -39,7 +42,8 @@ IPv6 协议还需要 NAT 吗？
 
 IPv6 解决了 IP 耗尽的问题，为机构、组织、公司、家庭等网络提供了充足的 IP 资源，从这个角度看是不是就不需要 NAT 协议了呢？
 
-在没有 IPv6 之前，NAT 是 IP 资源耗尽的主流解决方案。在一个内网中的全部设备通过 NAT 协议共享一个外网的 IPv4 地址，是目前内外网对接的主要方式。IPv6 地址资源充足，可以给全球每个设备一个独立的地址。从这个角度看 IPv6 的确不需要 NAT 协议。
+在没有 IPv6 之前，NAT 是 IP 资源耗尽的主流解决方案。在一个内网中的全部设备通过 NAT 协议共享一个外网的 IPv4 地址，是目前内外网对接的主要方式。IPv6 地址资源充足，可以给全球每个设备一个独立的地址。从这个角度看
+IPv6 的确不需要 NAT 协议。
 
 但是目前的情况，是 IPv6 网络还没有完全普及。尽管很多公司已经支持自己的互联网产品可以使用 IPv6 访问，但是公司内部员工使用的内部网络还是 IPv4。如果要连接 IPv6 和 IPv4 网络，仍然需要 NAT 协议(NAT64)
 ，这个协议可以让多个 IPv6 的设备共享一个 IPv4 的公网地址。
@@ -52,35 +56,35 @@ IPv6 解决了 IP 耗尽的问题，为机构、组织、公司、家庭等网�
 
 关于这个实战问题，以 Java 为例，写了一个回声服务(即客户端发送什么服务段返回什么)，以下是服务端程序:
 
-```shell
+```java
 var socket = new DatagramSocket(8888);
 var buf = new byte[256];
 while (true) {
     DatagramPacket
-    packet = new DatagramPacket(buf, buf.length);
+    packet = new DatagramPacket(buf， buf.length);
     System.out.println("try receive...");
     socket.receive(packet);
     var address = packet.getAddress();
     int
     port = packet.getPort();
-    packet = new DatagramPacket(buf, buf.length, address, port);
+    packet = new DatagramPacket(buf， buf.length， address， port);
     String
-    received = new String(packet.getData(), 0, packet.getLength());
+    received = new String(packet.getData()， 0， packet.getLength());
     socket.send(packet);
 }
 ```
 
 以下是客户端程序:
 
-```shell
+```java
 var buf = "Hello".getBytes();
 var socket = new DatagramSocket();
 var address = InetAddress.getByName("localhost");
-var packet = new DatagramPacket(buf, buf.length, address, 8888);
+var packet = new DatagramPacket(buf， buf.length， address， 8888);
 socket.send(packet);
 socket.receive(packet);
-String received = new String(packet.getData(), 0, packet.getLength());
-System.out.format("Server echo : %s\n", received);
+String received = new String(packet.getData()， 0， packet.getLength());
+System.out.format("Server echo : %s\n"， received);
 ```
 
 上面两段程序发送和接收的都是 Datagram 报文。而且服务端和客户端之间不需要建立连接。服务端可以通过读取客户端的地址区分客户端，客户端通过服务端地址和端口发送数据到服务端。

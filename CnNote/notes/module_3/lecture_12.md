@@ -19,7 +19,7 @@
 
 BIO(Blocking I/O，阻塞 I/O)，API 的设计会阻塞程序调用。比如:
 
-```shell
+```java
 byte a = readKey()
 ```
 
@@ -28,7 +28,7 @@ byte a = readKey()
 
 再说说 NIO (None Blocking I/O，非阻塞 IO)，API 的设计不会阻塞程序的调用，比如:
 
-```shell
+```java
 byte a = readKey()
 ```
 
@@ -37,7 +37,7 @@ byte a = readKey()
 
 最后说说 AIO(Asynchronous I/O， 异步 I/O)，API 的设计会多创造一条时间线。比如:
 
-```shell
+```java
 func callBackFunction(byte keyCode) {
   // 处理按键
 }
@@ -50,7 +50,7 @@ readKey( callBackFunction )
 
 但是通常说某某语言提供了异步 I/O，不仅仅是说提供上面程序这种写法，上面的写法会产生一个叫作回调地狱的问题，本质是异步程序的时间线错乱，导致维护成本较高。
 
-```shell
+```java
 request("/order/123", (data1) -> {
   //..
   request("/product/456", (data2) -> {
@@ -64,7 +64,7 @@ request("/order/123", (data1) -> {
 
 比如上面这段程序(称作回调地狱)维护成本较高，因此通常提供异步 API 编程模型时，我们会提供一种将异步转化为同步程序的语法。比如下面这段伪代码:
 
-```shell
+```java
 Future future1 = request("/order/123")
 Future future2 = request("/product/456")
 Future future3 = request("/sku/789")

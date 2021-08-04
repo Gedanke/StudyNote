@@ -1,6 +1,6 @@
 # TCP 实战: TCP 抓包调试
 
-这一讲带来了一个网络调试工具——Wireshark。Wireshark 是世界上应用最广泛的网络协议分析器，它让我们在微观层面上看到整个网络正在发生的事情。
+这一讲带来了一个网络调试工具——Wireshark。Wireshark 是世界上应用最广泛的网络协议分析器，它能让我们在微观层面上看到整个网络正在发生的事情。
 
 ---
 ---
@@ -126,7 +126,7 @@ PING a.w.bilicdn1.com (223.111.221.130) 56(84) bytes of data.
 
 ![](../../images/module_2/9_9.png)
 
-然后是客户端返回给百度一个 ACK:
+然后是客户端返回给 bilibili 一个 ACK:
 
 ![](../../images/module_2/9_10.png)
 
@@ -140,7 +140,7 @@ PING a.w.bilicdn1.com (223.111.221.130) 56(84) bytes of data.
 
 ![](../../images/module_2/9_13.png)
 
-之后百度回传了证书:
+之后 bilibili 回传了证书:
 
 ![](../../images/module_2/9_14.png)
 
