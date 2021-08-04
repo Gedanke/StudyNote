@@ -450,7 +450,7 @@ OpenJDK 64-Bit Server VM (build 11.0.8+10-post-Ubuntu-0ubuntu120.04 mixed mode, 
 
 ## 课后练习题
 
-最后再给出一道题:  ```~/.bashrc```，```~/.bash_profile```，```~/.profile``` 和 ```/etc/profile``` 的区别是什么？
+最后再给出一道题: ```~/.bashrc```，```~/.bash_profile```，```~/.profile``` 和 ```/etc/profile``` 的区别是什么？
 
 ---
 ---

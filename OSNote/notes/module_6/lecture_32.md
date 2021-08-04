@@ -8,7 +8,7 @@ Petabytes 级别，1PB = 1024TB)。分布式数据库则在分布式文件系统
 * Google File System
 * BigTable: A Distributed Storage System for Structured Data
 
-Google File System 是一个分布式文件系统，构成了今天大数据生态的底层存储，也是我们本讲主角 HDFS 的原型。HDFS(Hadoop Distributed File System)是 Google File System
+Google File System 是一个分布式文件系统，构成了今天大数据生态的底层存储，也是本讲主角 HDFS 的原型。HDFS(Hadoop Distributed File System)是 Google File System
 的一个重要实现。
 
 后者 BigTable 是一个分布式数据库。BigTable 本身是 Google 内部的项目，建立在 Google File System 之上，为 Google 的搜索引擎提供数据支撑。它是 2005 年公布的第一个版本，而且通过
@@ -200,7 +200,7 @@ Google File System。这样，BigTable 使用 Tablet 的时候，只需要当成
 
 后来，Hadoop 根据 GFS 设计了 Hadoop 分布式文件系统，用于处理大数据，仍然延续了整个 GFS 的设计。
 
-以上，是一个完整的，分布式数据库、分布式存储技术的一个入门级探讨。
+以上是一个完整的，分布式数据库、分布式存储技术的一个入门级探讨。
 
 那么通过这节课的学习，回到本节关联的面试题目: 分布式文件系统是怎么回事？
 

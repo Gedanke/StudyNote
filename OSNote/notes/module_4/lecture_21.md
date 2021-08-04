@@ -118,7 +118,7 @@ void eat() throws InterruptedException {
 eat 方法依赖于 forks 对象的锁，相当于 eat 方法这里会同步——因为这里有读取临界区操作做。Thread.sleep 依然用于描述 eat 方法的时间开销。sleep 方法没有放到 synchronized
 内是因为在并发控制时，应该尽量较少锁的范围，这样可以增加更大的并发量。
 
-以上对问题进行了一个基本的抽象。接下来请思考在什么情况会发生死锁？
+以上对问题进行了一个基本的抽象。接下来请思考，在什么情况会发生死锁？
 
 ---
 
@@ -301,7 +301,7 @@ void _take(int i) throws InterruptedException {
 最后是对 LiveLock 的思考，为了避免叉子在两个哲学家之间来回转让，为每个叉子增加了一个 dirty 属性。一开始叉子的 dirty 是 true，每次转让后，哲学家会把自己的叉子擦干净给另一个哲学家。转让的前置条件是叉子是
 dirty 的，所以叉子在两个哲学家之间只会转让一次。
 
-通过上面算法就可以避免死锁、饥饿以及提高读取数据(获取叉子)的并发度。最后完整的程序如下:
+通过上面算法就可以避免死锁、饥饿以及提高读取数据(获取叉子)的并发度。最后完整的 [程序](../../images/module_4/DiningPhilosophers.java) 如下:
 
 ```java
 package test;

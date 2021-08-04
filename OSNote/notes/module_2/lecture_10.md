@@ -231,7 +231,7 @@ Codename:	focal
 Nginx，主要目的是解决同一个互联网节点同时进入大量并发请求的问题。注意，大量并发请求不是大量 QPS 的意思，QPS 是吞吐量大，需要快速响应，而高并发时则需要合理安排任务调度。
 
 后来塞索耶夫成立了 Nginx 公司，2018 年估值到达到 4.3 亿美金。现在基本上国内大厂的 Web 服务器都是基于
-Nginx，只不过进行了特殊的修改，比如淘宝用 [Tengine](https://github.com/alibaba/tengine) 。
+Nginx，只不过进行了特殊的修改，比如淘宝用 [Tengine](https://github.com/alibaba/tengine)
 
 下面来看看源码安装，在 Linux 上获取 nginx 源码，可以去搜索 Nginx 官方网站，一般都会提供源码包。
 
@@ -520,8 +520,7 @@ cc -c -pipe  -O -W -Wall -Wpointer-arith -Wno-unused-parameter -Werror -g  -I sr
 //...
 ```
 
-可以看到编译是个非常慢的活。等待了差不多 1 分钟，终于结束了。nginx 被安装到了 ```/usr/local/nginx``` 中，如果需要让 nginx 全局执行，可以设置一个软连接到 ```/usr/local/bin```
-，具体如下:
+可以看到编译是个非常慢的活。等待了差不多 1 分钟(具体时长取决于机器配置)，终于结束了。nginx 被安装到了 ```/usr/local/nginx``` 中，如果需要让 nginx 全局执行，可以设置一个软连接到 ```/usr/local/bin```，具体如下:
 
 ```shell
 $ sudo ln -sf /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
@@ -531,8 +530,7 @@ $ sudo ln -sf /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
 
 ## 为什么会有编译安装
 
-原来使用 C/C++ 写的程序存在一个交叉编译的问题。就是写一次程序，在很多个平台执行。而不同指令集的 CPU 指令，还有操作系统的可执行文件格式是不同的。因此，这里有非常多的现实问题需要解决。一般是由操作系统的提供方，比如 RedHat
-来牵头解决这些问题。也可以用 apt 等工具提供给用户已经编译好的包。apt 会自动根据用户的平台类型选择不同的包。
+原来使用 C/C++ 写的程序存在一个交叉编译的问题。就是写一次程序，在很多个平台执行。而不同指令集的 CPU 指令，还有操作系统的可执行文件格式是不同的。因此，这里有非常多的现实问题需要解决。一般是由操作系统的提供方，比如 RedHat 来牵头解决这些问题。也可以用 apt 等工具提供给用户已经编译好的包。apt 会自动根据用户的平台类型选择不同的包。
 
 但如果某个包没有在平台侧注册，也没有提供某个 Linux 平台的软件包，就需要回退到编译安装，通过源代码直接在某个平台安装。
 
@@ -540,8 +538,7 @@ $ sudo ln -sf /usr/local/nginx/sbin/nginx /usr/local/sbin/nginx
 
 ## 总结
 
-这节课学习了在 Linux 上安装软件，简要介绍了 dpkg 和 rpm，然后介绍了能够解决依赖和帮助用户下载的 yum 和 apt。重点使用了 apt，在这个过程中看到了强大的包管理机制，今天的 maven、npm、pip
-都继承了这样一个特性。最后还尝试了一件事情，就是编译安装 nginx。
+这节课学习了在 Linux 上安装软件，简要介绍了 dpkg 和 rpm，然后介绍了能够解决依赖和帮助用户下载的 yum 和 apt。重点使用了 apt，在这个过程中看到了强大的包管理机制，今天的 maven、npm、pip 都继承了这样一个特性。最后还尝试了一件事情，就是编译安装 nginx。
 
 那么通过这节课的学习，回到本节关联的面试题目: 编译安装和包管理安装有什么优势和劣势了吗？
 

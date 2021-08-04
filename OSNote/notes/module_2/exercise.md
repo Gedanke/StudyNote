@@ -206,7 +206,7 @@ $ cat access.log | awk '{print $7}' | sort | uniq -c
 
 ## 12 | 高级技巧之集群部署: 利用 Linux 指令同时在多台机器部署程序
 
-```~/.bashrc ~/.bash_profile, ~/.profile``` 和 ```/etc/profile``` 的区别是什么？
+```~/.bashrc, ~/.bash_profile, ~/.profile``` 和 ```/etc/profile``` 的区别是什么？
 
 执行一个 shell 的时候分成 login shell 和 non-login shell。顾名思义我们使用了 ```sudo su``` 切换到某个用户身份执行 shell，也就是 login shell。还有 ssh 远程执行指令也是
 login shell，也就是伴随登录的意思——login shell 会触发很多文件执行，路径如下:

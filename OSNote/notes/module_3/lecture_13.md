@@ -144,7 +144,7 @@ Windows 有两个内核，最新的是 NT 内核，目前主流的 Windows 产�
 
 ## 思考题
 
-最后再给出一道需要查资料的思考题: Unix 和 Macintosh 内核属于哪种类型？
+最后再给出一道思考题: Unix 和 Macintosh 内核属于哪种类型？
 
 ---
 ---

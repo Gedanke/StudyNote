@@ -344,8 +344,6 @@ A1
 B
 C
 A2
-
-Process finished with exit code 0
 ```
 
 可以看到结果中任务 1 发生了 yield 在打印 A2 之前交出了控制权导致任务 B,C 先被执行。如果想在 yield 出上增加定时的功能，可以考虑 yield 发生后将任务移出队列，并在定时结束后重新插入回来。
