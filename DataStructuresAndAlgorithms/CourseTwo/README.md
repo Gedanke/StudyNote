@@ -1,0 +1,38 @@
+# readme
+
+本课程是拉勾教育之 [数据结构与算法面试宝典](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=685&sid=20-h5Url-0&#/sale)
+课程的学习笔记
+
+课程目录如下:
+
+* [开篇词](notes/begin.md)
+* [模块一: 数据结构之一解多题篇](notes/module_1)
+    * [栈: 从简单栈到单调栈，解决经典栈问题](notes/module_1/lecture_1.md)
+    * [队列: FIFO 队列与单调队列的深挖与扩展](notes/module_1/lecture_2.md)
+    * [优先级队列: 堆与优先级队列，筛选最优元素](notes/module_1/lecture_3.md)
+    * [链表: 如何利用"假头、新链表、双指针"解决链表题(上)](notes/module_1/lecture_4.md)
+    * [链表: 如何利用"假头、新链表、双指针"解决链表题(下)](notes/module_1/lecture_5.md)
+    * [树: 如何深度运用树的遍历](notes/module_1/lecture_6.md)
+    * [并查集: 如何利用两行代码写并查集](notes/module_1/lecture_7.md)
+    * [加餐与答疑: 一问一答](notes/module_1/lecture_module_1.md)
+* [模块二: 算法之一解多题篇](notes/module_2)
+    * [排序: 如何利用合并与快排的小技巧，解决算法难题](notes/module_2/lecture_8.md)
+    * [二分搜索: 为什么说有序皆可用二分](notes/module_2/lecture_9.md)
+    * [双指针: 如何掌握最长、定长、最短区间问题的解题决窍](notes/module_2/lecture_10.md)
+    * [贪心: 这种思想，没有模板，如何才能掌握它](notes/module_2/lecture_11.md)
+    * [回溯: 回溯总结成一个公式，回溯题一出就用它](notes/module_2/lecture_12.md)
+    * [搜索: 如何掌握 DFS 与 BFS 的解题套路](notes/module_2/lecture_13.md)
+    * [DP: 如何掌握 DP](notes/module_2/lecture_14.md)
+* [模块三: 一题多解篇](notes/module_3)
+    * [字符串查找: 为什么最终选择了 BM 算法](notes/module_3/lecture_15.md)
+    * [如何利用 DP 与单调队列寻找最大矩形](notes/module_3/lecture_16.md)
+    * [深度思考子集: 如何掌握 5 种通用解法](notes/module_3/lecture_17.md)
+    * [单词接龙: 如何巧用深搜与广搜的变形](notes/module_3/lecture_18.md)
+    * [最小体力消耗路径: 如何突破经典题型，掌握解题模板](notes/module_3/lecture_19.md)
+    * [5 种解法，如何利用常量空间求解最长有效括号长度](notes/module_3/lecture_20.md)
+    * [安排会议室: 如何利用多种方法安排会议室](notes/module_3/lecture_21.md)
+* [模块四: 代码模板篇](notes/module_4)
+    * [数据结构模板: 如何让解题变成搭积木](notes/module_4/lecture_22.md)
+    * [算法模板: 如何让高频算法考点秒变默写题](notes/module_4/lecture_23.md)
+    * [大厂面试经历](notes/module_4/lecture_24.md)
+* [结束语](notes/end.md)
