@@ -53,10 +53,10 @@
 
 ![](../../images/module_1/1_3.gif)
 
-代码如下:
+[代码](../../codes/module_1/LectureOne.java) 如下:
 
 ```java
-public void s1_1() {
+public static void fun_1_1() {
     int a[] = { 1, 2, 3, 4, 5 };
     int b[] = new int[5];
     for (int i = 0; i < a.length; i++) {
@@ -77,10 +77,10 @@ public void s1_1() {
 
 ![](../../images/module_1/1_4.gif)
 
-代码如下:
+[代码](../../codes/module_1/LectureOne.java) 如下:
 
 ```java
-public void s1_2() {
+public static void fun_1_2() {
     int a[] = { 1, 2, 3, 4, 5 };
     int tmp = 0;
     for (int i = 0; i < (a.length / 2); i++) {
@@ -106,10 +106,12 @@ public void s1_2() {
 
 代码的时间复杂度，与代码的结构有非常强的关系，一起来看一些具体的例子。
 
-例 1，定义了一个数组 a = [1, 4, 3]，查找数组 a 中的最大值，代码如下:
+例 1，定义了一个数组 a = [1, 4, 3]，查找数组 a 中的最大值。
+
+[代码](../../codes/module_1/LectureOne.java) 如下:
 
 ```java
-public void s1_3() {
+public static void fun_1_3() {
     int a[] = { 1, 4, 3 };
     int max_val = -1;
     for (int i = 0; i < a.length; i++) {
@@ -125,8 +127,10 @@ public void s1_3() {
 
 例2，下面的代码定义了一个数组 a = [1, 3, 4, 3, 4, 1, 3]，并会在这个数组中查找出现次数最多的那个数字:
 
+[代码](../../codes/module_1/LectureOne.java) 如下:
+
 ```java
-public void s1_4() {
+public static void fun_1_4() {
     int a[] = { 1, 3, 4, 3, 4, 1, 3 };
     int val_max = -1;
     int time_max = 0;
@@ -135,7 +139,8 @@ public void s1_4() {
         time_tmp = 0;
         for (int j = 0; j < a.length; j++) {
             if (a[i] == a[j]) {
-            time_tmp += 1;
+                time_tmp += 1;
+            }
         }
         if (time_tmp > time_max) {
             time_max = time_tmp;
