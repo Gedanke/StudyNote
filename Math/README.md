@@ -4,7 +4,7 @@
 
 课程目录如下:
 
-* [begin](notes/begin.md)
+* [开始](notes/begin.md)
 * [模块一](notes/module_1): 无处不在的数学思维
     * [从计数开始，程序员必知必会的数制转换法](notes/module_1/lecture_1.md)
     * [逻辑与沟通，怎样才能讲出有逻辑的话](notes/module_1/lecture_2.md)
@@ -33,5 +33,5 @@
 * [模块五: 彩蛋](notes/module_5)
     * [面试中那些坑了无数人的算法题](notes/module_5/lecture_22.md)
     * [站在生活的十字路口，如何用数学抉择](notes/module_5/lecture_23.md)
-* [end](notes/end.md)
+* [结束](notes/end.md)
 

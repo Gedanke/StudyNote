@@ -61,8 +61,6 @@
 [代码](../../codes/module_4/l_19_1.py) 如下:
 
 ```python
-# -*- coding: utf-8 -*-
-
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import *
 import math
@@ -212,7 +210,7 @@ for _ in range(maxloop):
 
 ```
 
-对代码进行走读
+对代码进行解读: 
 
 * 代码中，第 5～7 行分别输入数据集 x 和 y
 * 第 9 行，初始化参数向量，在这里，我们采用固定的初始化方法，你也可以调整为随机初始化
