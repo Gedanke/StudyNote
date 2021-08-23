@@ -2,7 +2,7 @@
 
 学到这里，你已经掌握了深度学习的理论知识，包括模型的训练、模型的评估，还学习了一些网络中组成的结构，例如 CNN 中的卷积操作、池化操作、BN 等。
 
-这一讲，我就要来和你聊聊框架的事儿。
+这一讲就要来和你聊聊框架的事儿。
 
 为什么要使用框架？
 
@@ -13,7 +13,7 @@
 
 一路过来，我们学习过很多数学概念(卷积、池化、正则、链式求导等)，你还记得吗？不出意外的话，学习的时候会稍有些迷糊吧。到了实际项目中，我们必须把那些理论知识都落实到代码里才能搭建我们的整个训练流程。
 
-现在我要问问你，你愿意自己写一个前向传播或者反向传播，或是我之前讲到的任意一个数学公式吗？我想大部分人都不愿意(因为我也是)。
+现在问问你，你愿意自己写一个前向传播或者反向传播，或是我之前讲到的任意一个数学公式吗？我想大部分人都不愿意(因为我也是)。
 
 除此之外，实际的项目工程还会面临很多硬件调度的问题，例如单机多卡训练、多机多卡训练、CPU 与 GPU 之间的交互。
 
@@ -21,6 +21,7 @@
 
 这就要用到框架了。
 
+---
 ---
 
 ## 主流深度学习框架
@@ -41,7 +42,7 @@ Python 编写的高级神经网络 API，它可以将 TensorFlow、CNTK，或是
 正如刚才所说，TensorFlow 是一个开源的机器学习框架，由谷歌开发与维护，并被用在谷歌的很多产品中，例如 Gmail、Google Photos、语音识别。但其实，无论是整个行业的研究领域还是实际工业中，TensorFlow
 使用度都很高。
 
-图 1: TensorFlow 官网
+![](../../images/module_2/13_1.png)
 
 从应用角度来说，TensorFlow 有多语言支持和应用环境广泛这两个特点。
 
@@ -56,7 +57,7 @@ Python 编写的高级神经网络 API，它可以将 TensorFlow、CNTK，或是
 
 ## TensorFlow 的版本
 
-T ensorFlow 在 2017 年 2 月 11 日发布了 1.0.0 版本，在 2019 年 1 月发布了 2.0 版本。
+TensorFlow 在 2017 年 2 月 11 日发布了 1.0.0 版本，在 2019 年 1 月发布了 2.0 版本。
 
 下文中，1.0 到 2.0 我们简称为 TensorFlow 1，从 2.0 开始我们简称为 TensorFlow 2。
 
@@ -84,7 +85,7 @@ TensorFlow 2 无论在 API 的管理还是易用性上都做出了巨大的改�
 
 ### TensorFlow 的安装
 
-TensorFlow 的安装有两种方式，一种是使用 pip，另一种是直接拉取 TensorFlow 的 Docker 镜像。
+TensorFlow 的安装有两种方式，一种是使用 pip，另一种是直接拉取 TensorFlow 的 Docker 镜像，当然，官网给出了更详细的安装方案。
 
 ---
 
@@ -128,7 +129,7 @@ TensorFlow 从1.14 版本开始支持 Eager Execution 模式，在 TensorFlow 2 
 
 Eager Execution 的使用方式
 
-来看一下 Eager Execution 的使用方式。先看下面这一段程序:
+来看一下 Eager Execution 的使用方式。先看下面这一段 [程序](../../codes/module_2/l_13_1.py) :
 
 ```python
 import tensorflow as tf
@@ -172,9 +173,11 @@ with tf.compat.v1.Session() as sess:
 当代码多了，这种方式就非常不便利了。
 
 Eager Execution 与 Numpy 可以很好地协同工作: Numpy 中的函数可以接受 tensor 作为参数，```tf.math``` 中的操作可以将 Python 的对象或者 Numpy 数组转换为 tensor
-对象，tensor 的 ```numpy()``` 方法又可以将 tensor 的值以 Numpy 数组的形式返回。请看下面的代码:
+对象，tensor 的 ```numpy()``` 方法又可以将 tensor 的值以 Numpy 数组的形式返回。请看下面的 [代码](../../codes/module_2/l_13_2.py) :
 
 ```python
+import tensorflow as tf
+
 # 定义一个常量 tensor
 a = tf.constant([[1, 2],
                  [3, 4]])
@@ -193,8 +196,8 @@ print(b)
 # [[ 1  4]
 #  [ 9 16]]
 
-# 将 tensor 的值以 numpy array 的形式返回: 
-a.numpy()
+# 将 tensor 的值以 numpy array 的形式返回:
+print(a.numpy())
 # output:
 # array([[1, 2],
 #        [3, 4]], dtype=int32)
@@ -243,42 +246,38 @@ TensorFlow 中，张量是不可以改变的，如果想改变张量的内容，
 
 (1) 创建一个标量，秩为 0，没有维度或者轴。
 
-```python
-mammal = tf.constant("Elephant", tf.string)
-ignition = tf.constant(451, tf.int16)
-floating = tf.constant(3.14159265359, tf.float64)
-mammal, ignition, floating
-# output:
-# (<tf.Tensor: shape=(), dtype=string, numpy=b'Elephant'>,
-#  <tf.Tensor: shape=(), dtype=int16, numpy=451>,
-#  <tf.Tensor: shape=(), dtype=float64, numpy=3.14159265359>)
+```shell
+>>> import tensorflow as tf
+>>> mammal = tf.constant("Elephant", tf.string)
+>>> ignition = tf.constant(451, tf.int16)
+>>> floating = tf.constant(3.14159265359, tf.float64)
+>>> mammal, ignition, floating
+(<tf.Tensor: shape=(), dtype=string, numpy=b'Elephant'>, <tf.Tensor: shape=(), dtype=int16, numpy=451>, <tf.Tensor: shape=(), dtype=float64, numpy=3.14159265359>)
 ```
 
 (2) 创建一个向量，秩为 1，有 1 个维度或者轴。
 
-```python
-mystr = tf.constant(["Hello"], tf.string)
-cool_numbers = tf.constant([3.14159, 2.71828], tf.float32)
-first_primes = tf.constant([2, 3, 5, 7, 11], tf.int32)
-mystr, cool_numbers, first_primes
-# output: 
-# (<tf.Tensor: shape=(1,), dtype=string, numpy=array([b'Hello'], dtype=object)>,
-#  <tf.Tensor: shape=(2,), dtype=float32, numpy=array([3.14159, 2.71828], dtype=float32)>,
-#  <tf.Tensor: shape=(5,), dtype=int32, numpy=array([ 2,  3,  5,  7, 11], dtype=int32)>)
+```shell
+>>> import tensorflow as tf
+>>> mystr = tf.constant(["Hello"], tf.string)
+>>> cool_numbers = tf.constant([3.14159, 2.71828], tf.float32)
+>>> first_primes = tf.constant([2, 3, 5, 7, 11], tf.int32)
+>>> mystr, cool_numbers, first_primes
+(<tf.Tensor: shape=(1,), dtype=string, numpy=array([b'Hello'], dtype=object)>, <tf.Tensor: shape=(2,), dtype=float32, numpy=array([3.14159, 2.71828], dtype=float32)>, <tf.Tensor: shape=(5,), dtype=int32, numpy=array([ 2,  3,  5,  7, 11], dtype=int32)>)
 ```
 
 (3) 创建一个矩阵，秩为 2，有 2 个维度或者轴。
 
-```python
-mymat = tf.constant([[1, 2],
-                     [3, 4],
-                     [5, 6]])
-mymat
-# output:
-# <tf.Tensor: shape=(3, 2), dtype=int32, numpy=
-# array([[1, 2],
-#        [3, 4],
-#        [5, 6]], dtype=int32)>
+```shell
+>>> import tensorflow as tf
+>>> mymat = tf.constant([[1, 2],
+...                      [3, 4],
+...                      [5, 6]])
+>>> mymat
+<tf.Tensor: shape=(3, 2), dtype=int32, numpy=
+array([[1, 2],
+       [3, 4],
+       [5, 6]], dtype=int32)>
 ```
 
 张量的维度或者轴的数目不局限于刚才介绍的标量、向量与矩阵，它可以有更高的维度，这个是根据程序来定的。我们可以通过 ```numpy.asarray()``` 或者 ```tensor.numpy()``` 方法将 tensor 转换为
@@ -301,19 +300,19 @@ Numpy 数组。
 
 变量与张量十分相似，变量也有形状(shape)和数据类型(dtype)的属性，并且也可以转换为 Numpy 数组。
 
-我们用下面的代码举例，看一下创建变量以及打印出变量的相关信息:
+用下面的代码举例，看一下创建变量以及打印出变量的相关信息:
 
-```python
-# 创建变量 var 并打印数据类型与形状
-var = tf.Variable(initial_value=[[1.0, 2.0, 3.0], [1.0, 2.0, 3.0]])
-# initial_value 可以省略
-print('var is {} \nshape is {} \ntype is {}'.format(var, var.shape, var.dtype))
-# output:
-# var is <tf.Variable 'Variable:0' shape=(2, 3) dtype=float32, numpy=
-# array([[1., 2., 3.],
-#        [1., 2., 3.]], dtype=float32)> 
-# shape is (2, 3) 
-# type is <dtype: 'float32'>
+```shell
+>>> import tensorflow as tf
+>>> # 创建变量 var 并打印数据类型与形状
+>>> var = tf.Variable(initial_value=[[1.0, 2.0, 3.0], [1.0, 2.0, 3.0]])
+>>> # initial_value 可以省略
+>>> print('var is {} \nshape is {} \ntype is {}'.format(var, var.shape, var.dtype))
+var is <tf.Variable 'Variable:0' shape=(2, 3) dtype=float32, numpy=
+array([[1., 2., 3.],
+       [1., 2., 3.]], dtype=float32)> 
+shape is (2, 3) 
+type is <dtype: 'float32'>
 ```
 
 ---
@@ -341,7 +340,7 @@ TensorFlow 变量的生命周期与 Python 对象的生命周期相同。
 #### 静态计算图
 
 TensorFlow 1 中，如果用低级 API(在下一讲 [14 | 工作机制与流程: 通过手写识别深入了解 TensorFlow](lecture_14.md) 中会介绍)
-构建模型，我们要先定义好计算图，这种计算图就是静态计算图机制。定义好计算图之后，再通过 Session 启动计算图，如下面代码所示:
+构建模型，我们要先定义好计算图，这种计算图就是静态计算图机制。定义好计算图之后，再通过 Session 启动计算图，如下面 [代码](../../codes/module_2/l_13_3.py) 所示:
 
 ```python
 import tensorflow as tf
@@ -454,8 +453,8 @@ z3 与 z2 是同一张计算图，Python 原生的 print 函数没有被加载�
 
 ## 总结
 
-介绍了 Eager Execution 模式、张量与 tf.function 这 3 部分知识，它们是 TensorFlow 最基本的组成单元。今天讲的内容只能说是 TensorFlow 的冰山一角，在接下来的第 14 和 15 讲以及"
-模块三"的实战中，还会继续补充 TensorFlow 的知识。
+介绍了 Eager Execution 模式、张量与 ```tf.function``` 这 3 部分知识，它们是 TensorFlow 最基本的组成单元。今天讲的内容只能说是 TensorFlow 的冰山一角，在接下来的第 14 和 15
+讲以及"模块三"的实战中，还会继续补充 TensorFlow 的知识。
 
 想变成 TensorFlow 高手肯定是一个不断遇到问题、解决问题的过程，希望你在学完这一讲之后也能多学习，多实践。
 
