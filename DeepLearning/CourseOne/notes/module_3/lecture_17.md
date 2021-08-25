@@ -1,6 +1,6 @@
 # 图像分类: 实现你的第一个图像分类实战项目
 
-上一讲中学习了 3 个图像分类中经典的卷积神经网络，今天要从实战的角度学习图像分类相关的知识。我们要做 2 件事: 
+上一讲中学习了 3 个图像分类中经典的卷积神经网络，本节要从实战的角度学习图像分类相关的知识。我们要做 2 件事: 
 
 * 了解 AlexNet
 * 搭建一个 AlexNet 的训练框架
@@ -12,9 +12,7 @@
 
 AlexNet 的提出可以说是具有里程碑的意义，在 ImageNet 分类比赛中它将 Top-5 的错误率降低到了 16.40，取得了巨大的进步。我们可以从下图中看到它的贡献: 
 
-
-
-图 1: 历年来 ImageNet 上 Top-5 的错误率
+![](../../images/module_3/17_1.png)
 
 虽然在当时 AlexNet 取得了卓越的成就，但随着深度学习技术的不断发展，AlexNet 很少会被用在实际中了。尽管很少被使用，但 Alex 的结构相对简单，非常适合入门学习。因此，我们就从它入手。
 
@@ -29,7 +27,7 @@ AlexNet 的特点现在看起来很普通，但它在当时具有里程碑式的
 * 采用多 GPU 训练(现在的深度学习框架都支持多 GPU 训练了)
 * 提出了 LRN(Local Response Normalization)局部响应值归一化
 
-以上 4 点就是 AlexNet 的主要特点。现在看看，是不是你已经掌握了其中大部分的内容了？
+以上 4 点就是 AlexNet 的主要特点。
 
 LRN 的目的是增强模型的泛化能力，使响应较大的值变得更大，并抑制反馈较小的神经元。
 
@@ -41,9 +39,7 @@ LRN 的目的是增强模型的泛化能力，使响应较大的值变得更大�
 
 AlexNet 一共有 8 层，分为 5 层卷积层与 3 层全连接层，如下图所示: 
 
-
-
-图 2: AlexNet 的网络结构
+![](../../images/module_3/17_2.png)
 
 因为 AlexNet 采用 2 个 GPU 训练，所以网络分为上下结构。以现在的技术来说，我们不会再采用这种方式训练，因为深度学习框架为我们提供了多 GPU 的训练方式。所以，今天我只搭建 AlexNet 的一部分。为了能快速实验，我也减少了每一层的卷积核的数目。
 
@@ -75,7 +71,7 @@ layers.Dense(10, activation='softmax')
 
 ## 训练 AlexNet
 
-我要在 CIFAR-10 上训练一个 AlexNet。
+我们要在 CIFAR-10 上训练一个 AlexNet。
 
 在 [14 | 工作机制与流程: 通过手写识别深入了解 TensorFlow](../module_2/lecture_14.md) 中，我讲过模型训练的 4 个基本要素。
 
@@ -84,9 +80,9 @@ layers.Dense(10, activation='softmax')
 * 损失函数: 更新模型参数的核心
 * 优化方法: 更新模型参数的方法
 
-今天我们依然要从这 4 个方面出发，构建一个 AlexNet 的训练框架。不过这次稍有不同: 首先，我会更加侧重一下有关数据部分的操作；其余的部分我也不会采用低级 API，而是采用 Tensorflow 更推荐的高级 API 来实现。
+本节依然要从这 4 个方面出发，构建一个 AlexNet 的训练框架。不过这次稍有不同: 首先，我会更加侧重一下有关数据部分的操作；其余的部分我也不会采用低级 API，而是采用 Tensorflow 更推荐的高级 API 来实现。
 
-话不多说，我们先来看看 CIFAR-10 数据。
+话不多说，先来看看 CIFAR-10 数据。
 
 ---
 
@@ -94,9 +90,7 @@ layers.Dense(10, activation='softmax')
 
 CIFAR-10 数据集一共由 60000 张图片构成，共 10 个类别，每一类包含 6000 图片，每张图片都是 32x32 的 RGB 图片。其中 50000 张图片作为训练集，10000 张图片作为测试集。
 
-
-
-图 3: CIFAR-10 数据集
+![](../../images/module_3/17_3.png)
 
 CIFAR-10 已经是非常接近真实数据的数据集了。
 
@@ -104,7 +98,7 @@ CIFAR-10 已经是非常接近真实数据的数据集了。
 
 ### 数据加载的 Pipline
 
-我们训练的时候会采用 GPU 来进行硬件加速，但是数据读取部分的操作是在 CPU 上进行的。Tensorflow 为我们提供了一个 tf.data 模块，它帮助我们快速构建相关数据的 Pipline，加快了数据读取、处理的速度。
+我们训练的时候会采用 GPU 来进行硬件加速，但是数据读取部分的操作是在 CPU 上进行的。Tensorflow 为我们提供了一个 ```tf.data``` 模块，它帮助我们快速构建相关数据的 Pipline，加快了数据读取、处理的速度。
 
 在 ```tf.data``` 中我们会经常使用到 ```tf.data.Dataset``` 模块。Dataset 代表了一个序列的元素，其中每个元素又包含 1 个或者多个子元素。举个例子: 在图像分类中，训练集就是 1 个 Dataset，训练集是 1 个由图片和对应标签组成的序列，这个序列中的每个元素是图片与标签，元素中又有子元素，子元素是图像、标签。
 
@@ -112,13 +106,14 @@ CIFAR-10 已经是非常接近真实数据的数据集了。
 
 我们来看一个最简单的 Dataset 构建方法: 使用 ```from_tensor_slices``` 从 Numpy 数组中构建 Dataset。
 
-请看下面的代码: 
+请看下面的 [代码](../../codes/module_3/l_17_1.py) : 
 
 ````python
 import tensorflow as tf
+
 (x_train, y_train), (x_test, y_test) = tf.keras.datasets.cifar10.load_data()
 y_train = tf.one_hot(y_train, depth=10)
-y_test = tf.one_hot(y_test, depth=10) # [10k, 10]
+y_test = tf.one_hot(y_test, depth=10)  # [10k, 10]
 print('datasets:', x_train.shape, y_train.shape, x_test.shape, y_test.shape, x_train.min(), x_train.max())
 train_set = tf.data.Dataset.from_tensor_slices((x_train, y_train))
 test_set = tf.data.Dataset.from_tensor_slices((x_test, y_test))
@@ -158,10 +153,11 @@ map 的使用例子如下:
 
 ```python
 def preprocess(x, y):
-	    # [0~255] => [-1~1]
-	    x = 2 * tf.cast(x, dtype=tf.float32) / 255. - 1.
-	    y = tf.cast(y, dtype=tf.int32)
-	    return x,y
+    # [0~255] => [-1~1]
+    x = 2 * tf.cast(x, dtype=tf.float32) / 255. - 1.
+    y = tf.cast(y, dtype=tf.int32)
+    return x, y
+
 dataset = dataset.map(preprocess)
 ```
 
@@ -381,7 +377,7 @@ Epoch 3/3
 
 刚才介绍的顺序模型使用起来也中规中矩，可以应对绝大多数问题，但在实际应用中可能会遇到更加复杂的问题，例如模型有多个输入、共享中间变量。此时就需要用到 ```tf.keras``` 为我们提供的另一种更加灵活的模型搭建方式，函数式 API。函数式 API 中的层可以像函数一样被调用，且输入输出均为 tensor。
 
-为了简单明了，我将上述的 AlexNet 缩减到如下结构，请看代码: 
+为了简单明了，将上述的 AlexNet 缩减到如下结构，请看代码: 
 
 ```python
 # 首先创建一个输入层
@@ -399,7 +395,7 @@ output = layers.Dense(10, activation='softmax')(x)
 model = tf.keras.Model(inputs=inputs, outputs=output)
 ```
 
-其余部分就一样了。函数式 API搭建的模型同样需要编译，然后执行 fit 就可以开始训练了。
+其余部分就一样了。函数式 API 搭建的模型同样需要编译，然后执行 fit 就可以开始训练了。
 
 ---
 
@@ -411,9 +407,9 @@ model = tf.keras.Model(inputs=inputs, outputs=output)
 
 下面是几个常用的内置回调函数。
 
-* EarlyStopping:  当被监控指标在设定的若干个 epoch 后没有提升，则提前终止训练
-* TensorBoard:  保存 TensorBoard 信息
-* ModelCheckpoint:  定期保存模型
+* EarlyStopping: 当被监控指标在设定的若干个 epoch 后没有提升，则提前终止训练
+* TensorBoard: 保存 TensorBoard 信息
+* ModelCheckpoint: 定期保存模型
 * TerminateOnNaN: 如果遇到 loss 为 NaN，则终止训练
 
 请看下面这个例子，我们在训练代码中定义如下几个回调函数: 
@@ -441,11 +437,11 @@ model.fit(train_set, epochs=30, validation_data=test_set, callbacks=callbacks)
 
 ## 结语
 
-这一讲中我们通过训练一个缩减版的 AlexNet 完成了图像分类的项目的训练环节。虽然 AlexNet 网络结构简单，但整体流程大致是相同的。如果你在实际中遇到了较为复杂的问题，只需要将网络结构更换成 VGG、ResNet 等经典网络结构即可。
+这一讲通过训练一个缩减版的 AlexNet 完成了图像分类的项目的训练环节。虽然 AlexNet 网络结构简单，但整体流程大致是相同的。如果你在实际中遇到了较为复杂的问题，只需要将网络结构更换成 VGG、ResNet 等经典网络结构即可。
 
 那么，在最后给你留一个小练习: 你可以将我们在顺序模型中的网络结构改为函数式 API 的网络结构吗？
 
-下一讲，我将带你进入到图像分割算法的学习。图像分割是深度学习中另一个重要的应用场景，算法的复杂度要比图像分类更加复杂一些，你做好准备了吗？
+下一讲将带你进入到图像分割算法的学习。图像分割是深度学习中另一个重要的应用场景，算法的复杂度要比图像分类更加复杂一些，你做好准备了吗？
 
 ---
 ---
