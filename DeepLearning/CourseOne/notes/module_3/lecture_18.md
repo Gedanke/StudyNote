@@ -1,6 +1,6 @@
 # 语义分割: 技术背景与算法剖析
 
-上两讲，向你介绍了图片分类的原理与实践。这一讲将向你介绍"语义分割"，它与图片分类都是计算机视觉中的重要任务。
+上两讲向你介绍了图片分类的原理与实践。这一讲将向你介绍"语义分割"，它与图片分类都是计算机视觉中的重要任务。
 
 ---
 
@@ -10,35 +10,31 @@
 
 例如一张卧室的图片，我们通过卷积层从图片中提取特征信息后，如果是多分类，可以使用 Softmax 函数获得这张图最有可能所属的几种类别(卧室、床、台灯等)；如果是二分类，可以通过 Sigmoid 函数获得这张图所属的类别(卧室还是床)。
 
-
-
-图 1: 卧室
+![](../../images/module_3/18_1.png)
 
 在语义分割中，我们同样要提取图片中的特征信息，只不过不是对图片的整体分类，而是对图像中的每一个像素分类，确定每一个像素所属的类别。
 
 当我们对上图进行语义分割，不同的颜色代表不同的类别，属于同一个物体的会被分为同一个类别: 台灯所在的区域被分为蓝色，床所在的区域被分为墨绿色。
 
+![](../../images/module_3/18_2.png)
 
+图 1、图 2
+来源 [Scene Parsing through ADE20K Dataset](http://people.csail.mit.edu/bzhou/publication/scene-parse-camera-ready.pdf)
+和 [Semantic Understanding of Scenes through ADE20K Dataset](https://arxiv.org/pdf/1608.05442.pdf)
 
-图 2: 语义分割后的卧室
+深度学习崛起之前，在计算机视觉领域进行图像分割还是一个难题。但随着深度学习的发展，图像分割中涌现出相当多的优秀算法和模型，使得图像分割在越来越多的领域中得到应用，例如自动驾驶、人机交互、医学影像处理，如下所示:
 
-图 1、图 2 来源 [Scene Parsing through ADE20K Dataset](http://people.csail.mit.edu/bzhou/publication/scene-parse-camera-ready.pdf) 和 [Semantic Understanding of Scenes through ADE20K Dataset](https://arxiv.org/pdf/1608.05442.pdf)
+![](../../images/module_3/18_3.png)
 
-深度学习崛起之前，在计算机视觉领域进行图像分割还是一个难题。但随着深度学习的发展，图像分割中涌现出相当多的优秀算法和模型，使得图像分割在越来越多的领域中得到应用，例如自动驾驶、人机交互、医学影像处理，如下所示: 
-
-
-
-图 3 来源 [The Cityscapes Dataset for Semantic Urban Scene Understanding](https://www.cityscapes-dataset.com/wordpress/wp-content/papercite-data/pdf/cordts2016cityscapes.pdf)
+图来源 [The Cityscapes Dataset for Semantic Urban Scene Understanding](https://www.cityscapes-dataset.com/wordpress/wp-content/papercite-data/pdf/cordts2016cityscapes.pdf)
 
 ----
 
 ### 语义分割算法与图像分类算法
 
-在图像分类问题中，输入的图片会通过卷积神经网络转换成相应的特征信息。通常这些特征信息会通过一个或者几个全连接层转换为一个标量，这个标量就是我们分类的标签。就像下面这个手写字体识别的例子: 
+在图像分类问题中，输入的图片会通过卷积神经网络转换成相应的特征信息。通常这些特征信息会通过一个或者几个全连接层转换为一个标量，这个标量就是我们分类的标签。就像下面这个手写字体识别的例子:
 
-
-
-图 4: 手写字体识别
+![](../../images/module_3/18_4.png)
 
 在最后的全连接层，会将前面的信息转换为一个维度为 10 的标量，最后一层中每一个神经元的输出就是输入图片所属的类别。
 
@@ -46,9 +42,7 @@
 
 通过下面这张图我们再解释一下两者的区别。
 
-
-
-图 5: 含全连接层的 CNN 与全卷积的 CNN
+![](../../images/module_3/18_5.png)
 
 假设我们要将 1 张图片分为 1000 类和分割成 1000 个类别。
 
@@ -56,17 +50,15 @@
 
 那分割时呢？我们需要推断出每个像素所属的类别，最后的全连接层换成有 1000 个卷积核的卷积层，输出的特征图就会有 1000 个通道，在这 1000 个通道每个像素点的位置上计算 argmax 就可以获得对应类别。
 
-那如何构建这样的分割网络呢？最简单的办法就是堆叠卷积层，通过控制 padding 的大小保证每一层输出的特征图的大小都是相同的，如图所示: 
+那如何构建这样的分割网络呢？最简单的办法就是堆叠卷积层，通过控制 padding 的大小保证每一层输出的特征图的大小都是相同的，如图所示:
 
-
-
-图 6: 简单语义分割网络示意图
+![](../../images/module_3/18_6.png)
 
 1 张 3 通道的图片，高、宽分别为 H、W。将图片作为输入，经过一系列的卷积操作，获得(C，H，W)的特征图，然后再计算每一个像素对应的类别。
 
 通常最终会输出宽高与原图相同的二维数组，二维数组的每个值记录了原图中对应像素的类别。这个二维数组可视化后就是上图最右侧的 Predictions。
 
-这种方式很简单，但会造成了 2 个问题: 
+这种方式很简单，但会造成了 2 个问题:
 
 * 感受野维持不变。我讲过池化(pooling)可以扩大感受野，感受野越大可以使分割网络越精细。但在上面的网络中，不会用到池化，所以它的感受野也不会发生变化
 * 计算量大，网络难以优化。
@@ -92,9 +84,11 @@
 
 ### FCN
 
-FCN 算是卷积神经网络在语义分割中的开山之作。你可以点击 [链接](https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Long_Fully_Convolutional_Networks_2015_CVPR_paper.pdf) 查看 FCN 的论文。
+FCN
+算是卷积神经网络在语义分割中的开山之作。你可以点击 [链接](https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Long_Fully_Convolutional_Networks_2015_CVPR_paper.pdf)
+查看 FCN 的论文。
 
-FCN 主要有 3 个创新点: 
+FCN 主要有 3 个创新点:
 
 * 采用全卷积神经网络，解决了像素级别的预测问题
 * 使用上采样操作恢复图像原有尺寸，实现像素级预测
@@ -108,7 +102,7 @@ FCN 主要有 3 个创新点:
 
 创新点 2 是"使用上采样操作恢复图像原有尺寸，实现像素级预测"，那什么是上采样呢？
 
-利用卷积与池化提取特征的过程中会让特征图逐渐变小。为了能进行像素级别的预测，我们需要将提取到的信息放大到原始的尺寸。放大特征图的方式就是上采样。上采样通常有 3 种方式: 
+利用卷积与池化提取特征的过程中会让特征图逐渐变小。为了能进行像素级别的预测，我们需要将提取到的信息放大到原始的尺寸。放大特征图的方式就是上采样。上采样通常有 3 种方式:
 
 * Resize，双线性插值
 * 转置卷积
@@ -122,8 +116,7 @@ FCN 主要有 3 个创新点:
 
 下图蓝色部分为一个 4x4 的特征图，在这个特征图上应用 3x3 的卷积(深蓝色部分)，padding=0，stride=1，输出为一个 2x2 的特征图。
 
-
-
+![](../../images/module_3/18_7.png)
 
 图片来源于 [GitHub](https://github.com/vdumoulin/conv_arithmetic)
 
@@ -133,21 +126,23 @@ FCN 主要有 3 个创新点:
 
 我们将上图中的卷积操作进行矩阵化处理，输入的特征图为 X，卷积为 K，输出为 Y。
 
+![](../../images/module_3/18_8.png)
 
+![](../../images/module_3/18_9.png)
 
+![](../../images/module_3/18_10.png)
 
+$Y=K*X$，```*``` 代表卷积操作。我们将 K 转换为一个矩阵 C，矩阵的每一行代表一个卷积操作，定义如下:
 
-Y=K*X，*代表卷积操作。我们将 K 转换为一个矩阵 C，矩阵的每一行代表一个卷积操作，定义如下: 
+![](../../images/module_3/18_11.png)
 
+为了将卷积操作转换为矩阵计算，我们还需要将输入 X 转换为向量的模式，我们定义为 X':
 
+![](../../images/module_3/18_12.png)
 
-为了将卷积操作转换为矩阵计算，我们还需要将输入 X 转换为向量的模式，我们定义为 X': 
+这样的话，输入的特征图为 X'，卷积矩阵为 C，输出的特征图为 Y。卷积变换可以转换为如下的矩阵计算 $Y=CX'$:
 
-
-
-这样的话，输入的特征图为 X'，卷积矩阵为 C，输出的特征图为 Y。卷积变换可以转换为如下的矩阵计算 Y=CX': 
-
-
+![](../../images/module_3/18_13.png)
 
 根据矩阵的计算方式可以知道，矩阵 C 的维度是 4x16，我们可以把一个 4x4 的特征转换为 2x2 的特征。那如果我们有一个 16x4 的卷积矩阵，是不是就可以把 2x2 的特征，恢复到 4x4 了？
 
@@ -163,23 +158,21 @@ Y=K*X，*代表卷积操作。我们将 K 转换为一个矩阵 C，矩阵的每
 
 创新点 3 是跨层连接，它"通过跨层连接融合了网络的浅层与深层次的信息"。
 
-我们先来看 FCN 的结构: 
+我们先来看 FCN 的结构:
 
+![](../../images/module_3/18_14.png)
 
+第一行直接对 pool5 的输出做 32 倍的上采样，然后对上采样中的每个像素点做 Softmax 预测，就得到了 32x upsampled prediction(FCN-32s)
+。这样一步到位的恢复到原始输入，会损失过多信息，效果非常不准。
 
-图 8: FCN 结构
-
-第一行直接对 pool5 的输出做 32 倍的上采样，然后对上采样中的每个像素点做 Softmax 预测，就得到了 32x upsampled prediction(FCN-32s)。这样一步到位的恢复到原始输入，会损失过多信息，效果非常不准。
-
-为了解决上面的问题，FCN 的作者先将 pool5 进行 2 倍的上采样，2 倍上采样后的大小与 pool4 相同。然后他将上采样后的结果与 pool4 相加，再进行 16 倍的上采样，再对每个像素做 Softmax 预测，就得到了 FCN-16s，效果有所提升，但仍然一般。
+为了解决上面的问题，FCN 的作者先将 pool5 进行 2 倍的上采样，2 倍上采样后的大小与 pool4 相同。然后他将上采样后的结果与 pool4 相加，再进行 16 倍的上采样，再对每个像素做 Softmax 预测，就得到了
+FCN-16s，效果有所提升，但仍然一般。
 
 因此，作者再次将上采样的倍数减少，对 pool5 与 pool4 先做上采样，使得它们的尺寸与 pool3 相同，然后将特征图相加。这时只需要做 8 倍的上采样就可以了。
 
-下面是 FCN-32s、FCN-16s、FCN-8s 的对比图: 
+下面是 FCN-32s、FCN-16s、FCN-8s 的对比图:
 
-
-
-图 9: FCN-32s、FCN-16s、FCN-8s 的对比图
+![](../../images/module_3/18_15.png)
 
 ---
 
@@ -191,11 +184,9 @@ U-Net 可以说是非常精简且高效的语义分割模型，无论在服务�
 
 U-Net 是基于 Encoder-Decoder 架构开发的，因此，我们通过 U-Net 分割网络来了解 Encoder-Decoder 架构。
 
-首先我们来看看 U-Net 的网络结构: 
+首先我们来看看 U-Net 的网络结构:
 
-
-
-图 10: U-Net 的网络结构
+![](../../images/module_3/18_16.png)
 
 U-Net 的网络结构呈现的是一个"U"型，U 的左侧是一个收缩的过程，就是我们刚才所说的 Encoder 过程；U 的右边是一个扩张过程，即 Decoder 过程。
 
@@ -226,33 +217,30 @@ Decoder 过程是为了让我们的特征图渐渐转换成一副一定尺寸的
 
 ### COCO 数据集
 
-COCO 是一个大规模物体检测、图像分割的数据集。图像分割部分的数据一共有 80 个类别。下载地址为 https://cocodataset.org/#download
+COCO 是一个大规模物体检测、图像分割的数据集。图像分割部分的数据一共有 80 个类别。下载地址为 [https://cocodataset.org/#download](https://cocodataset.org/#download)
 
 ---
 
 ### PASCAL-Context Dataset
 
-PASCAL-Context Dataset 在 PASCAL 数据的基础上补充了数据，训练和验证集包含 10,103 张图像，测试集包含 9,637 张图像。下载地址为https://cs.stanford.edu/~roozbeh/pascal-context/。
+PASCAL-Context Dataset 在 PASCAL 数据的基础上补充了数据，训练和验证集包含 10,103 张图像，测试集包含 9,637
+张图像。下载地址为 [https://cs.stanford.edu/~roozbeh/pascal-context/](https://cs.stanford.edu/~roozbeh/pascal-context/)
 
-
-
-图 11: PASCAL-Context Dataset
+![](../../images/module_3/18_17.png)
 
 ----
 
 ### MIT Scene Parsing Benchark
 
-用场景解析的数据集。共有 150 个类别，共有 20000 张图片。下载地址为http://sceneparsing.csail.mit.edu/。
+用场景解析的数据集。共有 150 个类别，共有 20000 张图片。下载地址为 [http://sceneparsing.csail.mit.edu/](http://sceneparsing.csail.mit.edu/)
 
 ---
 
 ### CitySpace
 
-有来自 50 个城市的街景数据，一共有 50 个类别。5000 张图片被精准标记过，20000 张图片被粗糙的标记过。下载地址为https://www.cityscapes-dataset.com/。
+有来自 50 个城市的街景数据，一共有 50 个类别。5000 张图片被精准标记过，20000 张图片被粗糙的标记过。下载地址为 [https://www.cityscapes-dataset.com/](https://www.cityscapes-dataset.com/)
 
-
-
-图 12: CitySpace
+![](../../images/module_3/18_18.png)
 
 ---
 
@@ -262,7 +250,7 @@ PASCAL-Context Dataset 在 PASCAL 数据的基础上补充了数据，训练和�
 
 那么我想提一个小问题: 假如一张图片的尺寸是 1024*720，语义分割网络输出的特征图是 80x80 可不可以呢？如果可以的话会有什么弊端呢？
 
-下一讲，我将带你使用 U-Net 训练一个人像分割模型。
+下一讲将带你使用 U-Net 训练一个人像分割模型。
 
 ---
 ---
